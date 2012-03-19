@@ -41,6 +41,30 @@ LOCK TABLES `tw_battles` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tw_championships`
+--
+
+DROP TABLE IF EXISTS `tw_championships`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tw_championships` (
+  `championship_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `championship_caption` varchar(255) NOT NULL,
+  `championship_description` text,
+  PRIMARY KEY (`championship_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tw_championships`
+--
+
+LOCK TABLES `tw_championships` WRITE;
+/*!40000 ALTER TABLE `tw_championships` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tw_championships` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tw_cohorts`
 --
 
@@ -51,6 +75,7 @@ CREATE TABLE `tw_cohorts` (
   `cohort_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `cohort_name` varchar(100) NOT NULL,
+  `cohort_rate` decimal(6,2) NOT NULL DEFAULT '1200.00',
   PRIMARY KEY (`cohort_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -74,6 +99,7 @@ DROP TABLE IF EXISTS `tw_publishes`;
 CREATE TABLE `tw_publishes` (
   `publish_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cohort_id` int(10) unsigned NOT NULL,
+  `championship_id` int(10) unsigned NOT NULL,
   `publish_date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`publish_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -137,6 +163,30 @@ LOCK TABLES `tw_tactics` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tw_user_rates`
+--
+
+DROP TABLE IF EXISTS `tw_user_rates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tw_user_rates` (
+  `user_id` int(10) unsigned NOT NULL,
+  `championship_id` int(10) unsigned NOT NULL,
+  `user_rate` decimal(6,2) NOT NULL DEFAULT '1200.00',
+  PRIMARY KEY (`user_id`,`championship_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tw_user_rates`
+--
+
+LOCK TABLES `tw_user_rates` WRITE;
+/*!40000 ALTER TABLE `tw_user_rates` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tw_user_rates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tw_users`
 --
 
@@ -146,7 +196,6 @@ DROP TABLE IF EXISTS `tw_users`;
 CREATE TABLE `tw_users` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_email` varchar(255) NOT NULL,
-  `user_elo_rate` decimal(6,2) NOT NULL DEFAULT '1200.00',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-03-12 23:43:50
+-- Dump completed on 2012-03-19  9:52:20

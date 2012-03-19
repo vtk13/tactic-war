@@ -1,0 +1,19 @@
+#last-replays {
+    background: #ddd;
+}
+#profile {
+    background: #eee;
+}
+#my-setouts {
+    background: #ccc;
+}
+#menubar {
+    background: #bbb;
+}
+
+.create-units, .code-editor, .replay-field {
+    background: #eee;
+}
+.create-field, .edit-field {
+    background: #ddd;
+}

@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    padding-left: 25px;
+}
+
+html, body {
+    height: 100%;
+}
+
+#menubar {
+    height: 50px;
+    z-index: 10;
+    position: relative;
+}
+
+#my-setouts, #last-replays, #profile {
+    float: left;
+    height: 100%;
+    margin-top: -50px;
+    z-index: 1;
+    position: relative;
+}
+#my-setouts>*:first-child, #last-replays>*:first-child, #profile>*:first-child {
+    margin-top: 50px;
+}
+
+#profile {
+    width: 34%;
+}
+#last-replays, #my-setouts {
+    width: 33%;
+}
+
+.create-units {
+    float: left;
+    width: 30%;
+    height: 400px;
+}
+.create-field {
+    float: left;
+    width: 70%;
+    height: 400px;
+}
+
+.code-editor {
+    float: left;
+    width: 50%;
+    height: 400px;
+}
+.edit-field {
+    float: left;
+    width: 50%;
+    height: 400px;
+}
+.replay-field {
+    height: 400px;
+}
