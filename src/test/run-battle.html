@@ -1,0 +1,11 @@
+<base href="/">
+<script type="text/javascript" src="/lib/require-jquery.js"></script>
+<script type="text/javascript">
+    requirejs(['game-entities/code.js',
+        'game-entities/footman.js',
+        'game-entities/cohort.js'], function(Code, Footman, Cohort) {
+        var tactic = new Code('move(4);');
+        var cohort = new Cohort([new Footman(tactic), new Footman(tactic)], new Code('test(123)'));
+        cohort.step();
+    });
+</script>
