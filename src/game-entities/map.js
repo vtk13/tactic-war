@@ -25,8 +25,8 @@ define(function() {
 
     Map.prototype.move = function(unit, distance)
     {
-        unit.x = unit.x + Math.cos(unit.direction) * distance;
-        unit.y = unit.y + Math.sin(unit.direction) * distance;
+        unit._set('x', unit.x + Math.cos(unit.direction) * distance);
+        unit._set('y', unit.y + Math.sin(unit.direction) * distance);
     }
 
     Map.prototype.nearest = function(unit)
@@ -36,6 +36,7 @@ define(function() {
         var distance, minIndex = -1, minDistance = Math.max(this.width, this.height) * 2;
         for (var i in this.items) {
             if (i == unitIndex) continue;
+            if (this.items[i].cohortId == unit.cohortId) continue;
             distance = this.distance(unitIndex, i);
             if (distance < minDistance) {
                 minIndex = i;

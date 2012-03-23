@@ -1,5 +1,8 @@
-if (queueSize() == 0) {
-    var target = nearest();
+resetQueue();
+var target = nearest();
+if (canAttack(target)) {
+    attack(target);
+} else {
     turn(direction(target));
     move(distance(target));
 }

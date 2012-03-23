@@ -37,7 +37,7 @@ define(function() {
 
         this.turn = function(direction)
         {
-            unit.direction = direction;
+            unit.turn(direction);
         };
 
         this.queueSize = function()

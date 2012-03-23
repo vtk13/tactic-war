@@ -12,7 +12,7 @@ define(['game-entities/map.js'], function(Map) {
         for (var i in this.cohort2.units) {
             this.map.add(this.cohort2.units[i], 10 * (i + 1), 10);
         }
-    }
+    };
 
     Game.prototype.step = function()
     {
@@ -26,8 +26,8 @@ define(['game-entities/map.js'], function(Map) {
         } else {
             return {winner: this.cohort1};
         }
-        return false;
-    }
+        return false; // game over?
+    };
 
     return Game;
 });

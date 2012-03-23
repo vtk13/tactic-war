@@ -5,7 +5,8 @@ requirejs(['game-entities/code.js',
         'game-entities/cohort.js',
         'game-entities/game.js',
         'game-entities/rules.js',
-        'fs'], function(Code, Footman, Cohort, Game, Rules, fs) {
+        'game-runner/logger.js',
+        'fs'], function(Code, Footman, Cohort, Game, Rules, Logger, fs) {
     var tactic = new Code(fs.readFileSync('test/tactic.js', 'utf8'));
     var rules = new Rules();
     var footman1 = new Footman(tactic, rules);
@@ -14,9 +15,13 @@ requirejs(['game-entities/code.js',
     var cohort2 = new Cohort([footman2], new Code(''));
     var game = new Game(cohort1, cohort2);
 
-    console.log(footman1.x + ' ' + footman1.y);
-    console.log(footman2.x + ' ' + footman2.y);
-    var steps = 10;
+    var logger = new Logger(game);
+
+    logger.on('change', function(data) {
+        console.log(data);
+    });
+
+    var steps = 40;
     var res;
     while ((res = game.step()) == false) {
         steps--;
@@ -25,6 +30,4 @@ requirejs(['game-entities/code.js',
         }
     }
 
-    console.log(footman1.x + ' ' + footman1.y);
-    console.log(footman2.x + ' ' + footman2.y);
 });

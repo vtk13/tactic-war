@@ -9,7 +9,8 @@
             'game-entities/cohort.js',
             'game-entities/game.js',
             'game-entities/rules.js',
-            'game-runner/player.js'], function(Code, Footman, Cohort, Game, Rules, Player) {
+            'game-runner/logger.js',
+            'game-runner/player.js'], function(Code, Footman, Cohort, Game, Rules, Logger, Player) {
             var tactic = new Code(
 "resetQueue();\
 var target = nearest();\
@@ -22,18 +23,21 @@ if (canAttack(target)) {\
             var rules = new Rules();
             var footman1 = new Footman(tactic, rules);
             var footman2 = new Footman(tactic, rules);
-            var cohort1 = new Cohort([footman1], new Code(''));
+            var footman3 = new Footman(tactic, rules);
+            var cohort1 = new Cohort([footman1, footman3], new Code(''));
             var cohort2 = new Cohort([footman2], new Code(''));
             var game = new Game(cohort1, cohort2);
+            var logger = new Logger(game);
+            logger.on('change', function(data) {
+                console.log(data);
+            });
 
-            var player = new Player(cohort1, cohort2, $('#field').get(0));
-            player.draw();
+            var player = new Player(logger, $('#field').get(0));
 
             var steps = 40;
 
             var interval = setInterval(function(){
                 var res = game.step();
-                player.draw();
                 if (res == false) {
                     steps--;
                     if (steps == 0) {
@@ -49,6 +53,6 @@ if (canAttack(target)) {\
     </script>
 </head>
 <body>
-    <canvas id="field" width="600" height="300" style="border: solid 1px #ccc"></canvas>
+    <canvas id="field" width="600" height="300" style="border: solid 1px #ccc;"></canvas>
 </body>
 </html>
