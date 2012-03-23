@@ -12,6 +12,9 @@ define(['game-entities/map.js'], function(Map) {
         for (var i in this.cohort2.units) {
             this.map.add(this.cohort2.units[i], 10 * (i + 1), 10);
         }
+
+        cohort1.enemies = cohort2;
+        cohort2.enemies = cohort1;
     };
 
     Game.prototype.step = function()

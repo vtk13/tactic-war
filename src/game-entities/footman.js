@@ -34,6 +34,11 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this._set('lives', this.lives - attack - this.rules.footmanArmor());
     };
 
+    Footman.prototype.setTarget = function(unit)
+    {
+        this.target = unit;
+    };
+
     Footman.prototype.step = function()
     {
         this.tactic.execute(this.sandbox);

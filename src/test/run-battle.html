@@ -13,30 +13,36 @@
             'game-runner/player.js'], function(Code, Footman, Cohort, Game, Rules, Logger, Player) {
             var tactic = new Code(
 "resetQueue();\
-var target = nearest();\
-if (canAttack(target)) {\
-    attack(target);\
+var _target = target();\
+if (!_target || _target.lives <= 0) {\
+    _target = nearest();\
+}\
+if (canAttack(_target)) {\
+    attack(_target);\
 } else {\
-    turn(direction(target));\
-    move(distance(target));\
+    turn(direction(_target));\
+    move(distance(_target));\
 }");
             var rules = new Rules();
-            var footman1 = new Footman(tactic, rules);
-            var footman2 = new Footman(tactic, rules);
-            var footman3 = new Footman(tactic, rules);
-            var cohort1 = new Cohort([footman1, footman3], new Code(''));
-            var cohort2 = new Cohort([footman2], new Code(''));
+            var cohort1 = new Cohort([new Footman(tactic, rules), new Footman(tactic, rules), new Footman(tactic, rules)], new Code(
+"var _enemies = enemies(), _confederates = confederates();\
+for (var i in _enemies) {\
+    if (_enemies[i].lives > 0) {\
+        for (var j in _confederates) {\
+            setTarget(_confederates[j], _enemies[i])\
+        }\
+    }\
+}\
+"));
+            var cohort2 = new Cohort([new Footman(tactic, rules), new Footman(tactic, rules), new Footman(tactic, rules)], new Code(''));
             var game = new Game(cohort1, cohort2);
             var logger = new Logger(game);
-            logger.on('change', function(data) {
-                console.log(data);
-            });
 
             var player = new Player(logger, $('#field').get(0));
 
             var steps = 40;
 
-            var interval = setInterval(function(){
+            window.interval = setInterval(function(){
                 var res = game.step();
                 if (res == false) {
                     steps--;
@@ -54,5 +60,6 @@ if (canAttack(target)) {\
 </head>
 <body>
     <canvas id="field" width="600" height="300" style="border: solid 1px #ccc;"></canvas>
+    <button onclick="clearInterval(window.interval)">Стоп</button>
 </body>
 </html>

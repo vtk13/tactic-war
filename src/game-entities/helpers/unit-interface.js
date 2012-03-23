@@ -15,6 +15,11 @@ define(function() {
             return unit.canAttack(target);
         };
 
+        this.target = function()
+        {
+            return unit.target;
+        };
+
         this.nearest = function()
         {
             var res = unit.map.nearest(unit);
