@@ -10,19 +10,24 @@ define(function() {
     {
         unit.x = x;
         unit.y = y;
+
+        unit.direction = (y > (this.height / 2)) ? Math.PI * 3 / 2 : Math.PI / 2; // 0 is right (x: 1, y: 0)
+
         unit.map = this;
         this.items.push(unit);
     };
 
     Map.prototype.remove = function(unit)
     {
-        for (var i in this.items) {
-            if (this.items[i] == unit) {
-                delete this.items[i];
-                break;
-            }
-        }
+        var index = this.find(unit);
+        delete this.items[index];
     };
+
+    Map.prototype.move = function(unit, distance)
+    {
+        unit.x = unit.x + Math.cos(unit.direction) * distance;
+        unit.y = unit.y + Math.sin(unit.direction) * distance;
+    }
 
     Map.prototype.nearest = function(unit)
     {
@@ -45,22 +50,54 @@ define(function() {
         var fromIndex   = typeof from != 'object' ? from : this.find(from);
         var toIndex     = typeof to != 'object' ? to : this.find(to);
 
-        var x1 = this.items[fromIndex].x;
-        var x2 = this.items[toIndex].x;
-        var y1 = this.items[fromIndex].y;
-        var y2 = this.items[toIndex].y;
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        var x = this.items[toIndex].x - this.items[fromIndex].x;
+        var y = this.items[toIndex].y - this.items[fromIndex].y;
+        return Math.sqrt(x*x + y*y);
     };
+
+    Map.prototype.direction = function(from, to)
+    {
+        var fromIndex   = typeof from != 'object' ? from : this.find(from);
+        var toIndex     = typeof to != 'object' ? to : this.find(to);
+
+        var x = this.items[toIndex].x - this.items[fromIndex].x;
+        var y = this.items[toIndex].y - this.items[fromIndex].y;
+
+//        var x2 = 1;
+//        var y2 = 0;
+//        var cos = (x * x2 + y * y2) / ( Math.sqrt(x*x + y*y) * Math.sqrt(x2*x2 + y2*y2) );
+
+        var cos = x / Math.sqrt(x*x + y*y);
+        var direction = Math.acos(cos);
+
+        // сектор 1: x>0, y>0, 2: x<0, y>0, 3: x<0, y<0, 4: x>0, y<0
+        // cos > 0 -> сектор 1,4
+        // y > 0 -> сектор 1,2
+        if (y < 0) {
+            direction = -direction;
+        }
+        return direction;
+    }
 
     Map.prototype.find = function(unit)
     {
         for (var i in this.items) {
-            if (this.items[i] == unit) {
+            if (this.items[i].id == unit.id) {
                 return i;
             }
         }
         throw new Error('Unit doensn\'t exists on map');
-    }
+    };
+
+    Map.prototype.fetch = function(unit)
+    {
+        for (var i in this.items) {
+            if (this.items[i].id == unit.id) {
+                return this.items[i];
+            }
+        }
+        throw new Error('Unit doensn\'t exists on map');
+    };
 
     return Map;
 });

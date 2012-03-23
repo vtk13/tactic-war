@@ -1,11 +1,54 @@
-<base href="/">
-<script type="text/javascript" src="/lib/require-jquery.js"></script>
-<script type="text/javascript">
-    requirejs(['game-entities/code.js',
-        'game-entities/footman.js',
-        'game-entities/cohort.js'], function(Code, Footman, Cohort) {
-        var tactic = new Code('move(4);');
-        var cohort = new Cohort([new Footman(tactic), new Footman(tactic)], new Code('test(123)'));
-        cohort.step();
-    });
-</script>
+<!doctype HTML>
+<html>
+<head>
+    <base href="/">
+    <script type="text/javascript" src="/lib/require-jquery.js"></script>
+    <script type="text/javascript">
+        requirejs(['game-entities/code.js',
+            'game-entities/footman.js',
+            'game-entities/cohort.js',
+            'game-entities/game.js',
+            'game-entities/rules.js',
+            'game-runner/player.js'], function(Code, Footman, Cohort, Game, Rules, Player) {
+            var tactic = new Code(
+"resetQueue();\
+var target = nearest();\
+if (canAttack(target)) {\
+    attack(target);\
+} else {\
+    turn(direction(target));\
+    move(distance(target));\
+}");
+            var rules = new Rules();
+            var footman1 = new Footman(tactic, rules);
+            var footman2 = new Footman(tactic, rules);
+            var cohort1 = new Cohort([footman1], new Code(''));
+            var cohort2 = new Cohort([footman2], new Code(''));
+            var game = new Game(cohort1, cohort2);
+
+            var player = new Player(cohort1, cohort2, $('#field').get(0));
+            player.draw();
+
+            var steps = 40;
+
+            var interval = setInterval(function(){
+                var res = game.step();
+                player.draw();
+                if (res == false) {
+                    steps--;
+                    if (steps == 0) {
+                        console.log(res);
+                        clearInterval(interval);
+                    }
+                } else {
+                    console.log(res);
+                    clearInterval(interval);
+                }
+            }, 300);
+        });
+    </script>
+</head>
+<body>
+    <canvas id="field" width="600" height="300" style="border: solid 1px #ccc"></canvas>
+</body>
+</html>
