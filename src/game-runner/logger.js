@@ -38,23 +38,27 @@ define(['lib/events.js'], function(EventEmitter) {
             }, unit._set);
         }
 
-        var self = this;
-
-        game.step = this.before(function() { // need only for first step
+        this.init = function()
+        {
             if (units.length) {
-                self.emit('change', units);
+                this.emit('change', units);
                 units = [];
             }
-        }, game.step);
+        };
 
-        game.step = this.after(game.step, function() {
+        var self = this;
+
+        this.emitChanges = function()
+        {
             var res = [];
             for (var i in units) {
                 res.push(units[i]);
             }
             self.emit('change', res);
             units = [];
-        });
+        };
+
+        game.step = this.after(game.step, this.emitChanges);
     };
 
     Logger.prototype.emit = EventEmitter.prototype.emit;

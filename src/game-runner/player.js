@@ -1,11 +1,3 @@
-/**
- * possible theme http://kuler.adobe.com/#themeID/24198
- * 468966
- * FFF0A5
- * FFB03B
- * B64926
- * 8E2800
- */
 define(['game-entities/footman.js'], function(Footman) {
     function Player(logger, canvas)
     {
@@ -60,6 +52,10 @@ define(['game-entities/footman.js'], function(Footman) {
             ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
             ctx.closePath();
             ctx.fill();
+            if (unit.selected) {
+                ctx.strokeStyle = '#fff';
+                ctx.stroke();
+            }
 
             ctx.beginPath();
             ctx.moveTo(unit.x, unit.y);

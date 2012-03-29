@@ -2,9 +2,30 @@
 html
     head
         title Tactic wars
+        base(href="/")
+    block styles
         link(rel="stylesheet", type="text/css", href="/public/layout.css")
         link(rel="stylesheet", type="text/css", href="/public/colors.css")
+    block scripts
+        script(src="/lib/require-jquery.js")
+
     body
         #menubar
-            a(href='/mypage')= __i('hello-username', 'username')
-        !{body}
+            if user
+                a(href='/mypage')= __i('hello-username', user.email)
+                |&nbsp;
+                a(href='/logout')= __i('logout')
+            else
+                p= __i('auth-caption')
+                form(method="post", action="/login")
+                    label
+                        = __i('promt-email')
+                        input(name="email")
+                    |&nbsp;
+                    label
+                        = __i('promt-password')
+                        input(name="password", type="password")
+                    |&nbsp;
+                    button(type="submit")= __i('button-login')
+            !{message}
+        block content

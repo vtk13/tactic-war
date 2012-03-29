@@ -3,8 +3,10 @@ define([], function() {
     if (typeof window == 'undefined') { // is server?
         var vm = require('vm');
 
-        var Code = function Code(src)
+        var Code = function Code(id, name, src)
         {
+            this.id = id;
+            this.name = name;
             this.script = vm.createScript(src);
         }
 
@@ -13,8 +15,10 @@ define([], function() {
             this.script.runInNewContext(sandbox);
         }
     } else {
-        var Code = function Code(src)
+        var Code = function Code(id, name, src)
         {
+            this.id = id;
+            this.name = name;
             this.src = src;
         }
 

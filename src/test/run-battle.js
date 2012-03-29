@@ -4,7 +4,7 @@ requirejs(['game-entities/code.js',
         'game-entities/footman.js',
         'game-entities/cohort.js',
         'game-entities/game.js',
-        'game-entities/rules.js',
+        'game-entities/rules/category1.js',
         'game-runner/logger.js',
         'fs'], function(Code, Footman, Cohort, Game, Rules, Logger, fs) {
     var tactic = new Code(fs.readFileSync('test/tactic.js', 'utf8'));

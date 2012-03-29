@@ -1,7 +1,24 @@
-h1= __i('cohort-edit')
-.code-editor
-    h2= __i('code-editor')
-.edit-field
-.controls
-    button= __i('play-step')
-    button= __i('play-all')
+extends ../layout
+
+append styles
+    link(rel="stylesheet", href="/lib/codemirror/codemirror.css")
+
+append scripts
+    script(src="/public/cohort-edit.js")
+    script(src="/lib/codemirror/codemirror.js")
+    script(src="/lib/codemirror/javascript.js")
+
+block content
+    h1= __i('cohort-edit')
+    .code-editor
+        h2= __i('code-editor')
+        input(type="hidden",name="cohort_id",value=cohort.id)
+        select(name="tactic")
+        input(name="name")
+        textarea(id="code-src", name="src")
+    .edit-field
+        canvas(id="field",width="600",height="300")
+    .controls
+        button(class="step")= __i('play-step')
+        button(class="all")= __i('play-all')
+        button(class="pause")= __i('button.pause')

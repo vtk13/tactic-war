@@ -1,19 +1,23 @@
-#last-replays {
-    background: #ddd;
+/*
+possible theme http://kuler.adobe.com/#themeID/1747003
+BAB293
+A39770
+EFE4BD
+A32500
+2B2922
+*/
+
+body {
+    background: #EFE4BD;
+    color: #2B2922;
 }
-#profile {
-    background: #eee;
-}
-#my-setouts {
-    background: #ccc;
-}
-#menubar {
-    background: #bbb;
+a {
+    color: #2B2922;
 }
 
-.create-units, .code-editor, .replay-field {
-    background: #eee;
+.create-units .footman, .create-units .archer {
+    background: #BAB293;
 }
-.create-field, .edit-field {
-    background: #ddd;
+.CodeMirror {
+    border-color: #2B2922;
 }

@@ -4,9 +4,9 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
      * @param units
      * @param strategy Code
      */
-    function Cohort(units, strategy)
+    function Cohort(id, units, strategy)
     {
-        this.id = Math.round(Math.random() * 1000);
+        this.id = id;
         this.units = units;
         for (var i in units) {
             units[i].cohortId = this.id;
@@ -35,12 +35,22 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
             }
         }
         return res;
-    }
+    };
+
+    Cohort.prototype.contain = function(unit)
+    {
+        for (var i in this.units) {
+            if (this.units[i] == unit) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     Cohort.prototype.test = function(param)
     {
         console.log(param);
-    }
+    };
 
     return Cohort;
 });

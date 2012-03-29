@@ -12,7 +12,7 @@ html, body {
 }
 
 #menubar {
-    height: 50px;
+    height: 80px;
     z-index: 10;
     position: relative;
 }
@@ -20,12 +20,12 @@ html, body {
 #my-setouts, #last-replays, #profile {
     float: left;
     height: 100%;
-    margin-top: -50px;
+    margin-top: -80px;
     z-index: 1;
     position: relative;
 }
 #my-setouts>*:first-child, #last-replays>*:first-child, #profile>*:first-child {
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 #profile {
@@ -58,4 +58,29 @@ html, body {
 }
 .replay-field {
     height: 400px;
+}
+
+
+.create-units .footman, .create-units .archer, .create-field .footman, .create-field .archer {
+    cursor: pointer;
+}
+
+.create-units .footman, .create-units .archer {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.create-field .footman, .create-field .archer {
+    float: left
+}
+img.unit {
+    padding: 0 7px;
+}
+
+#code-src {
+    height: 300px;
+}
+.CodeMirror {
+    border-width: 1px;
+    border-style: solid;
 }

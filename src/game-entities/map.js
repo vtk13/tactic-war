@@ -27,7 +27,21 @@ define(function() {
     {
         unit._set('x', unit.x + Math.cos(unit.direction) * distance);
         unit._set('y', unit.y + Math.sin(unit.direction) * distance);
-    }
+    };
+
+    Map.prototype.findByXY = function(x, y)
+    {
+        var nearest = null, minDistance = Math.max(this.width, this.height) * 2;
+        for (var i in this.items) {
+            var ix = this.items[i].x, iy = this.items[i].y;
+            var distance = Math.sqrt((x-ix)*(x-ix) + (y-iy)*(y-iy));
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearest = this.items[i];
+            }
+        }
+        return nearest;
+    };
 
     Map.prototype.nearest = function(unit)
     {

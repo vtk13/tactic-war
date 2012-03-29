@@ -3,9 +3,9 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
      *
      * @param tactic Code
      */
-    function Footman(tactic, rules)
+    function Footman(id, tactic, rules)
     {
-        this.id = Math.round(Math.random() * 1000);
+        this.id = id;
         this.tactic = tactic;
         this.rules = rules;
         this.lives = this.maxLives();
@@ -70,6 +70,8 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
                         // costs nothing so no "actions--"
                         break;
                 }
+            } else {
+                break;
             }
         }
     };

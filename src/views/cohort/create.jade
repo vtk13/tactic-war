@@ -1,5 +1,32 @@
-h1= __i('cohort-create')
-.create-units
-.create-field
-form(action='/cohort/1/edit')
-    button(type='submit')= __i('create')
+extends ../layout
+
+append scripts
+    script(src="/public/cohort-create.js")
+
+block content
+    h1= __i('cohort-create')
+    form(action="/cohort/create", method="post")
+        .create-units
+            .name
+                = __i('prompt-name')
+                input(name="name")
+            p= __i('rule-desc')
+            select.category(name="category")
+                each rule, id in rules
+                    option(value=id)= __i(rule.name())
+            each rule, id in rules
+                p(class='rule-desc rule'+id+'-desc')= __i('rule'+id+'-desc')
+            .footman
+                img(src="/public/images/footman.png", class="unit")
+                = __i('footman') + ': ' + 20 + ' ' + __i('coins')
+            .archer
+                img(src="/public/images/archer.png", class="unit")
+                = __i('archer') + ': ' + 25 + ' ' + __i('coins')
+            .coins
+                = __i('you-have')
+                |&nbsp;
+                span.value
+                |&nbsp;
+                = __i('coins')
+            button(type='submit')= __i('create')
+        .create-field
