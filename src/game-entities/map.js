@@ -43,16 +43,18 @@ define(function() {
         return nearest;
     };
 
-    Map.prototype.nearest = function(unit)
+    Map.prototype.nearest = function(unit, filter)
     {
         var unitIndex = this.find(unit);
 
         var distance, minIndex = -1, minDistance = Math.max(this.width, this.height) * 2;
         for (var i in this.items) {
             if (i == unitIndex) continue;
-            if (this.items[i].cohortId == unit.cohortId) continue;
             distance = this.distance(unitIndex, i);
             if (distance < minDistance) {
+                if (filter && !filter(this.items[i])) {
+                    continue;
+                }
                 minIndex = i;
                 minDistance = distance;
             }

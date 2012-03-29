@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    h3 Tactic API:
+    ul
+        li unit nearest() - ближайший живой враг
+        li bool catAttack(unit) - проверить в зоне досигаемости ли unit
+        li float direction(unit) - угол на который нужно повернуться, чтобы смотреть на unit
+        li turn(float) - повернуться на заданный угол (добавляет действие в очередь)
+        li float distance(unit) - растояние до unit
+        li move(distance) - двигаться вперед distance пикселей (добавляет действие в очередь)
+        li attack(unit) - атаковать unit, если unit в зоне досягаемости (добавляет действие в очередь)
+        li unit|null target() - результат этой функции может быть задан стратегической функцией
+        li queueSize() - кол-во действий в очереди
+        li resetQueue() - сбросить очередь действий
+        li log(mixed) - вывести переменную в консоль
+    h3 Strategy API:
+    ul
+        li array confederates() - свои юниты
+        li array enemies() - враги
+        li setTarget(unit, target) - задать unit цель target, которую unit сможет получить функцией target()
+        li log(mixed) - вывести переменную в консоль
+    h3 Свойства юнтов:
+    ul
+        li id
+        li lives
+        li x
+        li y

@@ -74,5 +74,9 @@ requirejs(['express', 'i18n',
         res.render('replay');
     });
 
+    app.get('/help/api', function(req, res) {
+        res.render('help/api');
+    });
+
     app.listen(3000);
 });

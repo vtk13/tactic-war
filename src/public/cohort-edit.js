@@ -37,9 +37,18 @@ requirejs(['game-entities/code.js',
             var cohort1 = new Cohort(cohort.id, units1, strategies[cohort.strategyId]);
 
             var units2 = [];
+            var code = new Code(0, '',
+"resetQueue();\n\
+_target = nearest();\n\
+if (canAttack(_target)) {\n\
+    attack(_target);\n\
+} else {\n\
+    turn(direction(_target));\n\
+    move(distance(_target));\n\
+}");
             for (var i in cohort.units) {
                 var unit = cohort.units[i];
-                units2.push(unitFactory.create(unit.type, -unit.id, new Code(0, '', ''), rules));
+                units2.push(unitFactory.create(unit.type, -unit.id, code, rules));
             }
             var cohort2 = new Cohort(-cohort.id, units2, new Code(0, '', ''));
 

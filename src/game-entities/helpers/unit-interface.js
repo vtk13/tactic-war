@@ -22,7 +22,9 @@ define(function() {
 
         this.nearest = function()
         {
-            var res = unit.map.nearest(unit);
+            var res = unit.map.nearest(unit, function(_unit) {
+                return _unit.lives > 0 && _unit.cohortId != unit.cohortId;
+            });
             return {
                 id: res.id,
                 x: res.x,
