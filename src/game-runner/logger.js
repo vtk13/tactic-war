@@ -63,6 +63,7 @@ define(['lib/events.js'], function(EventEmitter) {
 
     Logger.prototype.emit = EventEmitter.prototype.emit;
     Logger.prototype.on = EventEmitter.prototype.on;
+    Logger.prototype.removeAllListeners = EventEmitter.prototype.removeAllListeners;
 
     Logger.prototype.before = function(beforeFunc, func) {
         return function() {

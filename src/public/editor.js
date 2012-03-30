@@ -8,13 +8,13 @@ define(['game-entities/code.js'], function(Code) {
         }
     };
 
-    function Editor(codeSelect, nameInput, textarea, saveButton, cohort, tactics, strategies)
+    function Editor(codeSelect, nameInput, textarea, saveButton, tactics, strategies)
     {
         var self = this;
 
         this.codeSelect = codeSelect;
         this.nameInput = nameInput;
-        this.cohort = cohort;
+        this.cohort = null;
         this.code = null;
         this.currentUnit = null;
         this.codeMirror = CodeMirror.fromTextArea(textarea.get(0), {
@@ -50,9 +50,6 @@ define(['game-entities/code.js'], function(Code) {
             group.append('<option type="tactic" value="' + tactics[i].id + '">' + tactics[i].name + '</option>');
         }
         group.append('<option type="tactic" value="newtactic">Create new tactic...</option>');
-        if (cohort.strategy) {
-            codeSelect.val(cohort.strategy.id);
-        }
 
         nameInput.change(function() {
             var codeId = codeSelect.val();
@@ -70,7 +67,6 @@ define(['game-entities/code.js'], function(Code) {
         codeSelect.change(function() {
             if (this.value == 'none') {
                 self.setCode(null);
-                self.setDirty(false);
                 return;
             }
             var type = $(this).find('*[value=' + this.value + ']').attr('type');
@@ -97,6 +93,14 @@ define(['game-entities/code.js'], function(Code) {
         });
     };
 
+    Editor.prototype.setCohort = function(cohort)
+    {
+        this.cohort = cohort;
+        if (cohort.strategy) {
+            this.codeSelect.val(cohort.strategy.id);
+        }
+    };
+
     Editor.prototype.load = function(code)
     {
         this.push();
@@ -111,6 +115,7 @@ define(['game-entities/code.js'], function(Code) {
             this.codeMirror.setValue('');
             this.nameInput.val('');
             this.codeSelect.val('none');
+            this.setDirty(false);
             this.codeMirror.setOption('readOnly', true);
         }
     };
@@ -147,7 +152,8 @@ define(['game-entities/code.js'], function(Code) {
             }
         } else if (code) {
             if (this.currentUnit && this.currentUnit.tactic != code) {
-                $.post('/unit/' + this.currentUnit.id + '/edit', {
+                var id =this.currentUnit.id;
+                $.post('/unit/' + (id < 0 ? -id : id) + '/edit', {
                     tactic_id: code.id
                 });
                 this.currentUnit.tactic = code;

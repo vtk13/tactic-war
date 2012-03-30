@@ -34,5 +34,6 @@
 	"footman": "Пехотинец",
 	"archer": "Лучник",
 	"prompt-name": "Название отряда:",
-	"button.pause": "Пауза"
+	"button.pause": "Пауза",
+	"button.restart": "button.restart"
 }

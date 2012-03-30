@@ -2,20 +2,29 @@ define(['game-entities/footman.js'], function(Footman) {
     function Player(logger, canvas)
     {
         this.units = [];
-        var self = this;
-        logger.on('change', function(items) {
-            for (var i in items) {
-                var unit = items[i];
-                if (self.units[unit.id] == undefined) {
-                    self.units[unit.id] = {};
-                }
-                for (var j in unit) {
-                    self.units[unit.id][j] = unit[j];
-                }
-            }
-            self.draw();
-        });
         this.c2d = canvas.getContext('2d');
+        this.setSource(logger);
+    };
+
+    Player.prototype.setSource = function(logger)
+    {
+        if (logger) {
+            this.units = [];
+            var self = this;
+            logger.on('change', function(items) {
+                for (var i in items) {
+                    var unit = items[i];
+                    if (self.units[unit.id] == undefined) {
+                        self.units[unit.id] = {};
+                    }
+                    for (var j in unit) {
+                        self.units[unit.id][j] = unit[j];
+                    }
+                }
+                self.draw();
+            });
+            logger.init();
+        }
     };
 
     Player.prototype.draw = function()

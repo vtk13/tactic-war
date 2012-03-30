@@ -69,10 +69,15 @@ define(['restrict.js', 'db.js', 'game-entities/rules/list.js'], function(restric
 
     function edit(req, res)
     {
-        res.render('cohort/edit', {
+        var data = {
             cohort: {
                 id: req.params.cohort_id
-            }
+            },
+            cohorts: []
+        };
+        db.query("SELECT * FROM tw_cohorts WHERE user_id=?", [req.session.user.id], function(err, result, fields) {
+            data.cohorts = result;
+            res.render('cohort/edit', data);
         });
     };
 

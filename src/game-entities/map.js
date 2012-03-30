@@ -25,8 +25,12 @@ define(function() {
 
     Map.prototype.move = function(unit, distance)
     {
-        unit._set('x', unit.x + Math.cos(unit.direction) * distance);
-        unit._set('y', unit.y + Math.sin(unit.direction) * distance);
+        var x = unit.x + Math.cos(unit.direction) * distance;
+        var y = unit.y + Math.cos(unit.direction) * distance;
+        if (isFinite(x) && isFinite(y)) {
+            unit._set('x', unit.x + Math.cos(unit.direction) * distance);
+            unit._set('y', unit.y + Math.sin(unit.direction) * distance);
+        }
     };
 
     Map.prototype.findByXY = function(x, y)
@@ -64,6 +68,9 @@ define(function() {
 
     Map.prototype.distance = function(from, to)
     {
+        if (!from || !to) {
+            return undefined;
+        }
         var fromIndex   = typeof from != 'object' ? from : this.find(from);
         var toIndex     = typeof to != 'object' ? to : this.find(to);
 

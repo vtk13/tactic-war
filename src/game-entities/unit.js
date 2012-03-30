@@ -40,6 +40,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
 
     Unit.prototype.step = function()
     {
+        if (!this.tactic) return;
         this.tactic.execute(this.sandbox);
         var actions = 1;
         while (actions) {

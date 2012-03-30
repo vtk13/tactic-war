@@ -28,7 +28,9 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
     Cohort.prototype.step = function()
     {
         var res = [];
-        this.strategy.execute(this.sandbox);
+        if (this.strategy) {
+            this.strategy.execute(this.sandbox);
+        }
         for (var i in this.units) {
             if (this.units[i].lives > 0) {
                 res.push(this.units[i].step());
