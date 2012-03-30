@@ -25,11 +25,15 @@ define(function() {
             var res = unit.map.nearest(unit, function(_unit) {
                 return _unit.lives > 0 && _unit.cohortId != unit.cohortId;
             });
-            return {
-                id: res.id,
-                x: res.x,
-                y: res.y
-            };
+            if (res) {
+                return {
+                    id: res.id,
+                    x: res.x,
+                    y: res.y
+                };
+            } else {
+                null;
+            }
         };
 
         this.distance = function(toUnit)
@@ -39,7 +43,9 @@ define(function() {
 
         this.direction = function(toUnit)
         {
-            return unit.map.direction(unit, toUnit);
+            if (toUnit) {
+                return unit.map.direction(unit, toUnit);
+            }
         };
 
         this.turn = function(direction)

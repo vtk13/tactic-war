@@ -37,17 +37,20 @@ define(['game-entities/footman.js'], function(Footman) {
 
         for (var i in units) {
             if (units[i].type == 'Footman') {
-                this.drawFootman(units[i]);
+                this.drawUnit(units[i], '#B64926');
+            }
+            if (units[i].type == 'Archer') {
+                this.drawUnit(units[i], '#f5d277');
             }
         }
     };
 
-    Player.prototype.drawFootman = function(unit)
+    Player.prototype.drawUnit = function(unit, color)
     {
         var ctx = this.c2d;
         var size = 7;
         if (unit.lives > 0) {
-            ctx.fillStyle = '#B64926';
+            ctx.fillStyle = color;
             ctx.beginPath();
             ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
             ctx.closePath();
@@ -84,7 +87,7 @@ define(['game-entities/footman.js'], function(Footman) {
             ctx.closePath();
             ctx.fill();
         }
-    }
+    };
 
     return Player;
 });

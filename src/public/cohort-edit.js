@@ -59,7 +59,7 @@ if (canAttack(_target)) {\n\
             logger.init();
 
             var editor = new Editor($('select[name=tactic]'), $('input[name=name]'), $('#code-src'),
-                cohort1, tactics, strategies);
+                $('button#save'), cohort1, tactics, strategies);
 
             $('button.step').add('button.all').add('button.pause').click(function() {
                 editor.push();

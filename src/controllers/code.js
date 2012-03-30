@@ -20,7 +20,7 @@ define(['restrict.js', 'db.js'], function(restrict, db) {
     {
         var type = req.body.type;
         if (['tactic', 'strategy'].indexOf(type) == -1) {
-            req.end('wrong type');
+            res.end('wrong type "' + type + '"');
         }
         var name = req.body.name;
         var src = req.body.src;

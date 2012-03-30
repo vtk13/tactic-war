@@ -14,7 +14,9 @@ block content
         h2= __i('code-editor')
         input(type="hidden",name="cohort_id",value=cohort.id)
         select(name="tactic")
+            option(value="none") none
         input(name="name")
+        button#save Save
         textarea(id="code-src", name="src")
         a(href="/help/api", target="_blank") API Help
     .edit-field
