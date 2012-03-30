@@ -4,7 +4,8 @@ requirejs(['express', 'i18n',
         'controllers/user.js',
         'controllers/cohort.js',
         'controllers/code.js',
-        'controllers/unit.js'], function(express, i18n, user, cohort, code, unit) {
+        'controllers/unit.js',
+        'controllers/profile.js'], function(express, i18n, user, cohort, code, unit, profile) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
         console.trace();
@@ -58,13 +59,10 @@ requirejs(['express', 'i18n',
         res.render('sandbox');
     });
 
-    app.get('/mypage', function(req, res) {
-        res.render('mypage');
-    });
-
     cohort(app);
     code(app);
     unit(app);
+    profile(app);
 
     app.get('/setout/:cohort_id([0-9]+)/replays', function(req, res) {
         res.render('setouts/replays');

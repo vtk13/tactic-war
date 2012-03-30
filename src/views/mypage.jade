@@ -7,18 +7,11 @@ block content
         #my-cohorts
             h2= __i('my-cohorts')
             .cohort-list
-                .cohort
-                    a(href='/cohort/1/edit') test cohort1
-                    |&nbsp;
-                    a(href='/cohort/1/setout')= __i('set-out')
-                    |&nbsp;
-                    a(href='/cohort/1/replays', title=__i('view-replays'))= 1200
-                .cohort
-                    a(href='/cohort/2/edit') test cohort2
-                    |&nbsp;
-                    a(href='/cohort/2/setout')= __i('set-out')
-                    |&nbsp;
-                    a(href='/cohort/1/replays', title=__i('view-replays'))= 1200
+                each cohort in cohorts
+                    .cohort
+                        a(href='/cohort/'+cohort.cohort_id+'/edit')= cohort.cohort_name
+                        |&nbsp;
+                        a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
             .create
                 a(href='/cohort/create')= __i('cohort-create')
     #my-setouts
