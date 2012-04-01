@@ -1,1 +1,7 @@
 require: node.js, npm, requirejs, express, jade, i18n, mysql.
+
+daemon:
+
+cd src
+start-stop-daemon -Sb --user tactic --exec node -- server.js development
+start-stop-daemon -K --user tactic node -- server.js development

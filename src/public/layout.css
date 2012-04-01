@@ -84,3 +84,16 @@ img.unit {
     border-width: 1px;
     border-style: solid;
 }
+
+h2 {
+    margin-bottom: 12px;
+}
+p+h2, ul+h2 {
+    margin-top: 20px;
+}
+p, .controls {
+    margin-bottom: 7px;
+}
+canvas {
+    margin: 7px 0;
+}

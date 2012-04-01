@@ -14,9 +14,7 @@ define(['game-entities/code.js'], function(Code) {
 
         this.codeSelect = codeSelect;
         this.nameInput = nameInput;
-        this.cohort = null;
         this.code = null;
-        this.currentUnit = null;
         this.codeMirror = CodeMirror.fromTextArea(textarea.get(0), {
             mode: 'javascript',
             onChange: function()
@@ -66,7 +64,7 @@ define(['game-entities/code.js'], function(Code) {
 
         codeSelect.change(function() {
             if (this.value == 'none') {
-                self.setCode(null);
+                self.load(null);
                 return;
             }
             var type = $(this).find('*[value=' + this.value + ']').attr('type');
@@ -81,24 +79,16 @@ define(['game-entities/code.js'], function(Code) {
                     type == 'tactic' ? tactics[id] = code : strategies[id] = code;
                     codeSelect.find('option[value=new' + type + ']').before('<option type="' + type + '" value="'+id+'">' + code.name + '</option>');
                     codeSelect.val(id);
-                    self.setCode(code, type);
+                    self.load(code);
                 });
             } else {
-                self.setCode(type == 'tactic' ? tactics[this.value] : strategies[this.value], type);
+                self.load(type == 'tactic' ? tactics[this.value] : strategies[this.value]);
             }
         }).change();
 
         saveButton.click(function(){
             self.push();
         });
-    };
-
-    Editor.prototype.setCohort = function(cohort)
-    {
-        this.cohort = cohort;
-        if (cohort.strategy) {
-            this.codeSelect.val(cohort.strategy.id);
-        }
     };
 
     Editor.prototype.load = function(code)
@@ -130,54 +120,17 @@ define(['game-entities/code.js'], function(Code) {
                 src: code.src
             });
             this.setDirty(false);
-        }
-    };
-
-    Editor.prototype.close = function()
-    {
-        this.push();
-    };
-
-    Editor.prototype.setCode = function(code, type)
-    {
-        this.load(code);
-
-        if (type == 'strategy') {
-            this.setUnit(null);
-            if (this.cohort.strategy != code) {
-                $.post('/cohort/' + this.cohort.id + '/edit', {
-                    strategy_id: code.id
-                });
-                this.cohort.strategy = code;
-            }
-        } else if (code) {
-            if (this.currentUnit && this.currentUnit.tactic != code) {
-                var id =this.currentUnit.id;
-                $.post('/unit/' + (id < 0 ? -id : id) + '/edit', {
-                    tactic_id: code.id
-                });
-                this.currentUnit.tactic = code;
+            if (this.fieldControls) {
+                this.fieldControls.reloadStrategies();
+                this.fieldControls.reloadTactics();
             }
         }
     };
 
-    Editor.prototype.setUnit = function(unit)
+    Editor.prototype.setFieldControls = function(fieldControls)
     {
-        if (this.currentUnit != unit) {
-            if (this.currentUnit) {
-                this.currentUnit._set('selected', false);
-            }
-            this.currentUnit = unit;
-            if (unit) {
-                unit._set('selected', true);
-                if (unit.tactic && unit.tactic.id) {
-                    this.setCode(unit.tactic);
-                } else {
-                    this.setCode(null);
-                }
-            }
-        }
-    };
+        this.fieldControls = fieldControls;
+    }
 
     return Editor;
 });

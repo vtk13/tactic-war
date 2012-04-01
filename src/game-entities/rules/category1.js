@@ -37,7 +37,7 @@ define(function() {
     Category1.prototype.archerLives             = function() { return  60; };
     Category1.prototype.archerAttack            = function() { return   6; };
     Category1.prototype.archerArmor             = function() { return   1; };
-    Category1.prototype.archerAttackDistance    = function() { return 150; };
+    Category1.prototype.archerAttackDistance    = function() { return 100; };
 
     return Category1;
 });
