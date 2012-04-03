@@ -6,5 +6,9 @@ define(['mysql'], function(mysql) {
 
     client.query('USE `tactic-wars`');
 
+    setInterval(function() {
+        client.ping();
+    }, 120000);
+
     return client;
 });
