@@ -4,7 +4,7 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
      * @param units
      * @param strategy Code
      */
-    function Cohort(id, units, strategy)
+    function Cohort(id, units, strategy, tactics)
     {
         this.id = id;
         this.units = units;
@@ -12,6 +12,7 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
             units[i].cohortId = this.id;
         }
         this.strategy = strategy;
+        this.tactics = tactics; // for strategy to change unit tactics
         this.sandbox = new CohortInterface(this);
     }
 

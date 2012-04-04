@@ -22,9 +22,32 @@ define(['db.js', 'game-entities/managers/code-manager.js'], function(db, codeMan
             });
         },
 
+        load: function(publishId, cb)
+        {
+            db.query('SELECT * FROM tw_publishes WHERE publish_id=?', [publishId], function(error, result, fields) {
+                var publish = null;
+                if (!error && result.length == 1) {
+                    publish = {
+                        id:         result[0].publish_id,
+                        userId:     result[0].user_id,
+                        cohortId:   result[0].cohort_id,
+                        rulesId:    result[0].rules_id,
+                        name:       result[0].publish_name,
+                        active:     result[0].publish_active,
+                        date:       result[0].publish_date,
+                        rate:       parseFloat(result[0].publish_rate),
+                        strategy:   result[0].publish_strategy ? JSON.parse(result[0].publish_strategy) : null,
+                        units:      result[0].publish_units ? JSON.parse(result[0].publish_units) : null,
+                        tactics:    result[0].publish_tactics ? JSON.parse(result[0].publish_tactics) : null
+                    };
+                }
+                cb(error, publish);
+            });
+        },
+
         setout: function(cohort, cb) {
-            db.query('INSERT INTO tw_publishes(user_id, cohort_id, publish_name, publish_date, publish_units) VALUES (?, ?, ?, NOW(), ?)',
-                [cohort.userId, cohort.id, cohort.name, JSON.stringify(cohort.units)], function(error, info) {
+            db.query('INSERT INTO tw_publishes(user_id, cohort_id, rules_id, publish_name, publish_date, publish_units) VALUES (?, ?, ?, ?, NOW(), ?)',
+                [cohort.userId, cohort.id, cohort.rulesId, cohort.name, JSON.stringify(cohort.units)], function(error, info) {
                     if (error) {
                         cb(error);
                     } else {

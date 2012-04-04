@@ -14,6 +14,11 @@ define(function() {
         return 100;
     };
 
+    Category1.prototype.maxSteps = function()
+    {
+        return 400;
+    };
+
     Category1.prototype.availableUnits = function()
     {
         return {

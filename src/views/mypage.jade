@@ -26,5 +26,5 @@ block content
         h2
             = __i('last-replays')
         ul
-            li: a(href='/replay/2') last replay
-            li: a(href='/replay/1') previous replay
+            each replay in replays
+                li: a(href='/replay/' + replay.id)= replay.time.format('dd-mm-yyyy HH:MM')

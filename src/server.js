@@ -5,10 +5,13 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
         'controllers/cohort.js',
         'controllers/code.js',
         'controllers/unit.js',
-        'controllers/profile.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile) {
+        'controllers/profile.js',
+        'controllers/replay.js',
+        'game-runner/battle-runner.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile,
+                                                  replay, battleRunner) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
-        console.trace();
+        console.log(err.stack);
     });
 
     var app = express.createServer();
@@ -63,13 +66,10 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
     code(app);
     unit(app);
     profile(app);
+    replay(app);
 
     app.get('/setout/:cohort_id([0-9]+)/replays', function(req, res) {
         res.render('setouts/replays');
-    });
-
-    app.get('/replay/:replay_id([0-9]+)', function(req, res) {
-        res.render('replay');
     });
 
     app.get('/help/api', function(req, res) {
@@ -78,4 +78,10 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
 
     app.listen(3000);
     console.log('Server started at port 3000');
+
+    var runner = new battleRunner();
+//    runner.run();
+    setInterval(function() {
+        runner.run();
+    }, 60000);
 });

@@ -1,5 +1,10 @@
-h1= __i('replay-view')
-.replay-field
-.controls
-    button= __i('play-step')
-    button= __i('play-all')
+extends layout
+
+append scripts
+    script(src="/public/replay.js")
+
+block content
+    h1= __i('replay-view')
+    .replay-field
+        input(type="hidden", name="replayId", value=replayId)
+        canvas(id="field",width="600",height="300")

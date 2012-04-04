@@ -1,4 +1,3 @@
-
 requirejs(['game-entities/code.js',
     'public/editor.js',
     'public/field-controls.js'], function(Code, Editor, FieldControls) {

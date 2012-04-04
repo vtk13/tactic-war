@@ -17,6 +17,9 @@ define(['game-entities/map.js'], function(Map) {
         cohort2.enemies = cohort1;
     };
 
+    /**
+     * @return object if game over or false
+     */
     Game.prototype.step = function()
     {
         if (this.cohort1.alives()) {
@@ -29,7 +32,7 @@ define(['game-entities/map.js'], function(Map) {
         } else {
             return {winner: this.cohort1};
         }
-        return false; // game over?
+        return false; // game over? no! -> false
     };
 
     return Game;
