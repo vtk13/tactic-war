@@ -22,6 +22,6 @@ requirejs(['game-runner/player.js', 'lib/events.js'], function(Player, EventEmit
             if (logger.step() == false) {
                 clearInterval(interval);
             }
-        }, 300);
+        }, 200);
     });
 });

@@ -16,15 +16,22 @@ block content
                 a(href='/cohort/create')= __i('cohort-create')
     #my-setouts
         h2= __i('my-setouts')
-        .cohort-list
+        ul.cohort-list
             each publish in publishes
-                div(class='cohort' + (publish.active ? '' : ' inactive'))
+                li(class='cohort' + (publish.active ? '' : ' inactive'))
                     span= publish.name + ' (' + publish.date.format('dd-mm-yyyy HH:MM') + ')'
                     |&nbsp;
                     a(href='/setout/' + publish.id + '/replays', title=__i('view-replays'))= publish.rate
+                    p
+                        span.battles= __i('publish.battles') + ': ' + publish.battles
     #last-replays
         h2
             = __i('last-replays')
         ul
             each replay in replays
-                li: a(href='/replay/' + replay.id)= replay.time.format('dd-mm-yyyy HH:MM')
+                li
+                    p
+                        a(href='/replay/' + replay.id)= replay.publish1Name + ' VS. ' + replay.publish2Name
+                    p
+                        span= replay.result + ' '
+                        span.date= replay.time.format('dd-mm-yyyy HH:MM')

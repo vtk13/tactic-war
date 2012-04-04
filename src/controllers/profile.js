@@ -23,11 +23,19 @@ define(['restrict.js', 'db.js',
             }
         });
 
-        db.query('SELECT * FROM tw_battles ORDER BY battle_time DESC LIMIT 10', function(err, result) {
+        db.query('SELECT b.*, p1.publish_name publish1_name, p2.publish_name publish2_name ' +
+                   'FROM tw_battles b ' +
+                        'JOIN tw_publishes p1 ON b.publish1_id=p1.publish_id ' +
+                        'JOIN tw_publishes p2 ON b.publish2_id=p2.publish_id ' +
+               'ORDER BY battle_time DESC ' +
+                  'LIMIT 10', function(err, result) {
             for (var i in result) {
                 data.replays.push({
                     id: result[i].battle_id,
-                    time: result[i].battle_time
+                    time: result[i].battle_time,
+                    result: result[i].battle_result,
+                    publish1Name: result[i].publish1_name,
+                    publish2Name: result[i].publish2_name
                 });
             }
             if (--waitActions == 0) {

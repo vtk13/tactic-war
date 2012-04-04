@@ -28,5 +28,6 @@
 	"login-to-view": "Please, login.",
 	"rules-category1": "Category 1",
 	"rule-desc": "rule-desc",
-	"rule0-desc": "rule0-desc"
+	"rule0-desc": "rule0-desc",
+	"publish.battles": "publish.battles"
 }

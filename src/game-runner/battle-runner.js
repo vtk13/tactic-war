@@ -81,7 +81,7 @@ define(['db.js', 'game-runner/battle.js', 'child_process',
             this.getPublishPair(function(error, p1, p2) {
                 if (error) {
                     console.log(error);
-                    this.running = false;
+                    self.running = false;
                 } else {
                     var time = Date.now();
                     var n = cp.fork('game-runner/battle-server.js', [], {env: process.env});

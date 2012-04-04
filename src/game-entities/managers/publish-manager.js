@@ -3,7 +3,12 @@ define(['db.js', 'game-entities/managers/code-manager.js'], function(db, codeMan
     return {
         list: function(userId, cb)
         {
-            db.query('SELECT * FROM tw_publishes WHERE user_id=? ORDER BY publish_active DESC, publish_date DESC', [userId], function(error, result, fields) {
+            db.query('SELECT p.*, COUNT(b.battle_id) battles ' +
+                       'FROM tw_publishes p ' +
+                            'LEFT JOIN tw_battles b ON p.publish_id IN (b.publish1_id, b.publish2_id) ' +
+                      'WHERE p.user_id=? ' +
+                   'GROUP BY p.publish_id ' +
+                   'ORDER BY p.publish_active DESC, p.publish_date DESC', [userId], function(error, result, fields) {
                 var publishes = [];
                 if (!error) {
                     for (var i in result) {
@@ -14,7 +19,8 @@ define(['db.js', 'game-entities/managers/code-manager.js'], function(db, codeMan
                             name:       result[i].publish_name,
                             active:     result[i].publish_active,
                             date:       result[i].publish_date,
-                            rate:       result[i].publish_rate
+                            rate:       result[i].publish_rate,
+                            battles:    result[i].battles
                         });
                     }
                 }

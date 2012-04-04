@@ -97,3 +97,6 @@ p, .controls {
 canvas {
     margin: 7px 0;
 }
+span.date {
+    font-size: 80%;
+}

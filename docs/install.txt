@@ -4,4 +4,4 @@ daemon:
 
 cd src
 start-stop-daemon -Sb --user tactic -1 "/var/log/node/tactic.log" -2 "/var/log/node/tactic.log" --exec node -- server.js development
-start-stop-daemon -K --user tactic node -- server.js development
+start-stop-daemon -K --user tactic node
