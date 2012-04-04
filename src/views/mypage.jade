@@ -17,14 +17,11 @@ block content
     #my-setouts
         h2= __i('my-setouts')
         .cohort-list
-            .cohort
-                span test cohort1 (19.03.2012)
-                |&nbsp;
-                a(href='/setout/1/replays', title=__i('view-replays'))= 1200
-            .cohort
-                span test cohort2 (17.03.2012)
-                |&nbsp;
-                a(href='/setout/2/replays', title=__i('view-replays'))= 1200
+            each publish in publishes
+                div(class='cohort' + (publish.active ? '' : ' inactive'))
+                    span= publish.name + ' (' + publish.date.format('dd-mm-yyyy HH:MM') + ')'
+                    |&nbsp;
+                    a(href='/setout/' + publish.id + '/replays', title=__i('view-replays'))= publish.rate
     #last-replays
         h2
             = __i('last-replays')

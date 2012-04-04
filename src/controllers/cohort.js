@@ -1,6 +1,8 @@
 define(['restrict.js', 'db.js', 'game-entities/rules/list.js',
         'game-entities/managers/cohort-manager.js',
-        'game-entities/managers/code-manager.js'], function(restrict, db, rulesList, cohortManager, codeManager) {
+        'game-entities/managers/code-manager.js',
+        'game-entities/managers/publish-manager.js'], function(restrict, db, rulesList, cohortManager, codeManager,
+            publishManager) {
     function saveCohort(userId, rulesId, name, units, cb)
     {
         db.query("INSERT INTO tw_cohorts(user_id, rules_id, cohort_name)" +
@@ -114,37 +116,15 @@ define(['restrict.js', 'db.js', 'game-entities/rules/list.js',
                 console.log(error);
                 res.end('error');
             } else {
-                db.query('INSERT INTO tw_publishes(cohort_id, publish_date, publish_units) VALUES (?, NOW(), ?)',
-                    [cohort.id, JSON.stringify(cohort.units)], function(error, info) {
-                        if (error) {
-                            console.log(error);
-                            res.end('error');
-                        } else {
-                            var publishId = info.insertId;
-                            db.query("UPDATE tw_publishes SET publish_active=0 WHERE cohort_id=? AND publish_id <> ?",
-                                [cohort.id, publishId]);
-                            if (cohort.strategyId) {
-                                codeManager.load(cohort.strategyId, userId, function(error, code) {
-                                    if (error) {
-                                        console.log(error);
-                                        res.end('error');
-                                    }
-                                    db.query("UPDATE tw_publishes SET publish_strategy=? WHERE publish_id=?",
-                                        [JSON.stringify(code), publishId]);
-                                });
-                            }
-                            codeManager.loadTactics(userId, function(error, tactics) {
-                                if (error) {
-                                    console.log(error);
-                                    res.end('error');
-                                }
-                                db.query("UPDATE tw_publishes SET publish_tactics=? WHERE publish_id=?",
-                                    [JSON.stringify(tactics), publishId]);
-                            });
-                            // do not wait all actions
-                            res.redirect('back');
-                        }
-                    });
+                publishManager.setout(cohort, function(error) {
+                    if (error) {
+                        console.log(error);
+                        res.end('error');
+                    } else {
+                        req.session.message = 'Cohort published';
+                        res.redirect('back');
+                    }
+                });
             }
         });
     };

@@ -21,3 +21,7 @@ a {
 .CodeMirror {
     border-color: #2B2922;
 }
+
+.inactive, .inactive a {
+    color: #A39770;
+}

@@ -1,11 +1,11 @@
 var requirejs = require('requirejs');
 
-requirejs(['express', 'i18n',
+requirejs(['express', 'i18n', 'lib/date-format.js',
         'controllers/user.js',
         'controllers/cohort.js',
         'controllers/code.js',
         'controllers/unit.js',
-        'controllers/profile.js'], function(express, i18n, user, cohort, code, unit, profile) {
+        'controllers/profile.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
         console.trace();

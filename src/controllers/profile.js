@@ -1,12 +1,25 @@
-define(['restrict.js', 'db.js'], function(restrict, db) {
+define(['restrict.js', 'db.js',
+        'game-entities/managers/publish-manager.js'], function(restrict, db, publishManager) {
     function mypage(req, res)
     {
         var data = {
-            cohorts: []
+            cohorts: [],
+            publishes: []
         };
+        var waitActions = 2;
+
         db.query("SELECT * FROM tw_cohorts WHERE user_id=?", [req.session.user.id], function(err, result, fields) {
             data.cohorts = result;
-            res.render('mypage', data);
+            if (--waitActions == 0) {
+                res.render('mypage', data);
+            }
+        });
+
+        publishManager.list(req.session.user.id, function(error, publishes) {
+            data.publishes = publishes;
+            if (--waitActions == 0) {
+                res.render('mypage', data);
+            }
         });
     };
 
