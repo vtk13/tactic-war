@@ -1,10 +1,12 @@
-h2= __i('setout-replays')
-.replay-list
-    .replay
-        span test cohort1 (19.03.2012)
-        |&nbsp;
-        a(href='/replay/1')= __i('view-replay')
-    .replay
-        span test cohort2 (17.03.2012)
-        |&nbsp;
-        a(href='/replay/2')= __i('view-replay')
+extends ../layout
+
+block content
+    h2= __i('setout-replays')
+    ul.replay-list
+        each replay in replays
+            li
+                p
+                    a(href='/replay/' + replay.id)= replay.publish1Name + ' (' + replay.publish1Rate + ') VS. ' + replay.publish2Name + ' (' + replay.publish2Rate + ')'
+                p
+                    span= replay.result + ' '
+                    span.date= replay.time.format('dd-mm-yyyy HH:MM')

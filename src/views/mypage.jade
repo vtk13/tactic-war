@@ -3,27 +3,32 @@ extends layout
 block content
     #profile
         h2= __i('profile')
-        .rate= __i('rate') + ': ' + 1200
-        #my-cohorts
-            h2= __i('my-cohorts')
-            .cohort-list
-                each cohort in cohorts
-                    .cohort
-                        a(href='/cohort/'+cohort.cohort_id+'/edit')= cohort.cohort_name
-                        |&nbsp;
-                        a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
-            .create
-                a(href='/cohort/create')= __i('cohort-create')
+        .rate= __i('rate') + ': ' + rate
+        h2= __i('my-cohorts')
+        ul.cohort-list
+            each cohort in cohorts
+                li.cohort
+                    a(href='/cohort/'+cohort.cohort_id+'/edit')= cohort.cohort_name
+                    |&nbsp;
+                    a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
+        .create
+            a(href='/cohort/create')= __i('cohort-create')
     #my-setouts
         h2= __i('my-setouts')
         ul.cohort-list
             each publish in publishes
                 li(class='cohort' + (publish.active ? '' : ' inactive'))
-                    span= publish.name + ' (' + publish.date.format('dd-mm-yyyy HH:MM') + ')'
-                    |&nbsp;
-                    a(href='/setout/' + publish.id + '/replays', title=__i('view-replays'))= publish.rate
+                    span= publish.name
+                        span.date= ' ' + publish.date.format('dd-mm-yyyy HH:MM')
                     p
                         span.battles= __i('publish.battles') + ': ' + publish.battles
+                        |&nbsp;
+                        span= __i('label.rate') + publish.rate
+                    p
+                        a(href='/setout/' + publish.id + '/replays')= __i('view-replays')
+                        if publish.active
+                            |&nbsp;
+                            a(href='/setout/' + publish.id + '/hide')= __i('hide-publish')
     #last-replays
         h2
             = __i('last-replays')
@@ -31,7 +36,7 @@ block content
             each replay in replays
                 li
                     p
-                        a(href='/replay/' + replay.id)= replay.publish1Name + ' VS. ' + replay.publish2Name
+                        a(href='/replay/' + replay.id)= replay.publish1Name + ' (' + replay.publish1Rate + ') VS. ' + replay.publish2Name + ' (' + replay.publish2Rate + ')'
                     p
                         span= replay.result + ' '
                         span.date= replay.time.format('dd-mm-yyyy HH:MM')

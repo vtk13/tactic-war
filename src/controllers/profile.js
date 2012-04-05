@@ -1,13 +1,22 @@
 define(['restrict.js', 'db.js',
-        'game-entities/managers/publish-manager.js'], function(restrict, db, publishManager) {
+        'game-entities/managers/publish-manager.js',
+        'game-entities/managers/replay-manager.js'], function(restrict, db, publishManager, replyaManager) {
     function mypage(req, res)
     {
         var data = {
+            rate: 1200,
             cohorts: [],
             publishes: [],
             replays: []
         };
-        var waitActions = 3;
+        var waitActions = 4;
+
+        db.query("SELECT * FROM tw_users WHERE user_id=?", [req.session.user.id], function(err, result, fields) {
+            data.rate = result[0].user_rate;
+            if (--waitActions == 0) {
+                res.render('mypage', data);
+            }
+        });
 
         db.query("SELECT * FROM tw_cohorts WHERE user_id=?", [req.session.user.id], function(err, result, fields) {
             data.cohorts = result;
@@ -23,21 +32,8 @@ define(['restrict.js', 'db.js',
             }
         });
 
-        db.query('SELECT b.*, p1.publish_name publish1_name, p2.publish_name publish2_name ' +
-                   'FROM tw_battles b ' +
-                        'JOIN tw_publishes p1 ON b.publish1_id=p1.publish_id ' +
-                        'JOIN tw_publishes p2 ON b.publish2_id=p2.publish_id ' +
-               'ORDER BY battle_time DESC ' +
-                  'LIMIT 10', function(err, result) {
-            for (var i in result) {
-                data.replays.push({
-                    id: result[i].battle_id,
-                    time: result[i].battle_time,
-                    result: result[i].battle_result,
-                    publish1Name: result[i].publish1_name,
-                    publish2Name: result[i].publish2_name
-                });
-            }
+        replyaManager.list(null, function(replays) {
+            data.replays = replays;
             if (--waitActions == 0) {
                 res.render('mypage', data);
             }

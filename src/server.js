@@ -7,8 +7,9 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
         'controllers/unit.js',
         'controllers/profile.js',
         'controllers/replay.js',
+        'controllers/setout.js',
         'game-runner/battle-runner.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile,
-                                                  replay, battleRunner) {
+                                                  replay, setout, battleRunner) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
         console.log(err.stack);
@@ -67,10 +68,7 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
     unit(app);
     profile(app);
     replay(app);
-
-    app.get('/setout/:cohort_id([0-9]+)/replays', function(req, res) {
-        res.render('setouts/replays');
-    });
+    setout(app);
 
     app.get('/help/api', function(req, res) {
         res.render('help/api');

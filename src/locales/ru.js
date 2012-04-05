@@ -36,5 +36,7 @@
 	"prompt-name": "Название отряда:",
 	"button.pause": "Пауза",
 	"button.restart": "Заново",
-	"publish.battles": "Сражений"
+	"publish.battles": "Сражений",
+	"hide-publish": "Убрать",
+	"label.rate": "Рейтинг: "
 }
