@@ -35,6 +35,6 @@
 	"archer": "Лучник",
 	"prompt-name": "Название отряда:",
 	"button.pause": "Пауза",
-	"button.restart": "button.restart",
-	"publish.battles": "publish.battles"
+	"button.restart": "Заново",
+	"publish.battles": "Сражений"
 }

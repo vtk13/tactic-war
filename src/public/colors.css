@@ -1,27 +1,31 @@
 /*
-possible theme http://kuler.adobe.com/#themeID/1747003
-BAB293
-A39770
-EFE4BD
-A32500
-2B2922
+possible theme http://kuler.adobe.com/#themeID/62938
+DCEBDD
+B1BDB4
+7F917E
+6B6A60
+455250
 */
 
 body {
-    background: #EFE4BD;
-    color: #2B2922;
+    background: #DCEBDD;
+    color: #455250;
 }
 a {
-    color: #2B2922;
+    color: #455250;
 }
 
 .create-units .footman, .create-units .archer {
-    background: #BAB293;
+    background: #B1BDB4;
 }
 .CodeMirror {
-    border-color: #2B2922;
+    border-color: #455250;
 }
 
 .inactive, .inactive a {
-    color: #A39770;
+    color: #7F917E;
+}
+
+ul.replay-list li, ul.cohort-list li {
+    background: #B1BDB4;
 }
