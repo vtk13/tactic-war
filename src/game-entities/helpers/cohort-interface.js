@@ -7,9 +7,10 @@ define(function() {
                 var unit = cohort.units[i];
                 res.push({
                     id: unit.id,
+                    type: unit.constructor.name,
+                    lives: unit.lives,
                     x: unit.x,
-                    y: unit.y,
-                    lives: unit.lives
+                    y: unit.y
                 });
             }
             return res;
@@ -30,9 +31,10 @@ define(function() {
                 var unit = cohort.enemies.units[i];
                 res.push({
                     id: unit.id,
+                    type: unit.constructor.name,
+                    lives: unit.lives,
                     x: unit.x,
-                    y: unit.y,
-                    lives: unit.lives
+                    y: unit.y
                 });
             }
             return res;

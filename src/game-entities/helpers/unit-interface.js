@@ -20,6 +20,17 @@ define(function() {
             return unit.target;
         };
 
+        this.self = function()
+        {
+            return {
+                id: unit.id,
+                type: unit.constructor.name,
+                lives: unit.lives,
+                x: unit.x,
+                y: unit.y
+            };
+        };
+
         this.nearest = function()
         {
             var res = unit.map.nearest(unit, function(_unit) {
@@ -28,6 +39,8 @@ define(function() {
             if (res) {
                 return {
                     id: res.id,
+                    type: res.constructor.name,
+                    lives: res.lives,
                     x: res.x,
                     y: res.y
                 };

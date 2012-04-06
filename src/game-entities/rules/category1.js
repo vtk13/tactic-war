@@ -27,6 +27,9 @@ define(function() {
             },
             'archer': {
                 cost: 25
+//            },
+//            'ballista': {
+//                cost: 45
             }
         };
     };
@@ -43,6 +46,12 @@ define(function() {
     Category1.prototype.archerAttack            = function() { return   6; };
     Category1.prototype.archerArmor             = function() { return   1; };
     Category1.prototype.archerAttackDistance    = function() { return 100; };
+
+    Category1.prototype.ballistaSpeed           = function() { return   6; };
+    Category1.prototype.ballistaLives           = function() { return 100; };
+    Category1.prototype.ballistaAttack          = function() { return  20; };
+    Category1.prototype.ballistaArmor           = function() { return   0; };
+    Category1.prototype.ballistaAttackDistance  = function() { return 100; };
 
     return Category1;
 });
