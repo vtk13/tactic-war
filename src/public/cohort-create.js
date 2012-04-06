@@ -31,6 +31,15 @@ $(function() {
             setCoins(coins - 25);
         }
     });
+    $('.create-units .ballista').click(function() {
+        if (coins >= 25) {
+            var div = $('<div class="ballista"/>');
+            div.append($('img', this).clone());
+            div.append('<input type="hidden" name="units[]" value="ballista"/>');
+            $('.create-field').append(div);
+            setCoins(coins - 45);
+        }
+    });
 
     $('.create-field .footman').live('click', function() {
         $(this).remove();
@@ -39,5 +48,9 @@ $(function() {
     $('.create-field .archer').live('click', function() {
         $(this).remove();
         setCoins(coins + 25);
+    });
+    $('.create-field .ballista').live('click', function() {
+        $(this).remove();
+        setCoins(coins + 45);
     });
 });

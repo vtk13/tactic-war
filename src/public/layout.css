@@ -61,16 +61,18 @@ html, body {
 }
 
 
-.create-units .footman, .create-units .archer, .create-field .footman, .create-field .archer {
+.create-units .footman, .create-field .footman,
+.create-units .archer, .create-field .archer,
+.create-units .ballista, .create-field .ballista {
     cursor: pointer;
 }
 
-.create-units .footman, .create-units .archer {
+.create-units .footman, .create-units .archer, .create-units .ballista {
     padding: 5px;
     margin-bottom: 5px;
 }
 
-.create-field .footman, .create-field .archer {
+.create-field .footman, .create-field .archer, .create-field .ballista {
     float: left
 }
 img.unit {

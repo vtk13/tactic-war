@@ -28,6 +28,10 @@ define(function() {
         var x = unit.x + Math.cos(unit.direction) * distance;
         var y = unit.y + Math.cos(unit.direction) * distance;
         if (isFinite(x) && isFinite(y)) {
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (x > this.width) x = this.width;
+            if (y > this.height) y = this.height;
             unit._set('x', unit.x + Math.cos(unit.direction) * distance);
             unit._set('y', unit.y + Math.sin(unit.direction) * distance);
         }

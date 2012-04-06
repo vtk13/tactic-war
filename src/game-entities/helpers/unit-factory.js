@@ -1,4 +1,5 @@
-define(['game-entities/footman.js', 'game-entities/archer.js'], function(Footman, Archer) {
+define(['game-entities/footman.js', 'game-entities/archer.js',
+        'game-entities/ballista.js'], function(Footman, Archer, Ballista) {
 
     return {
         create: function(type, id, tactic, rules) {
@@ -7,8 +8,10 @@ define(['game-entities/footman.js', 'game-entities/archer.js'], function(Footman
                     return new Footman(id, tactic, rules);
                 case 'archer':
                     return new Archer(id, tactic, rules);
+                case 'ballista':
+                    return new Ballista(id, tactic, rules);
                 default:
-                    throw new Error('Unknown type ' + type);
+                    throw new Error('Unknown type "' + type + '"');
             }
         }
     };

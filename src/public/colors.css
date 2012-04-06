@@ -15,7 +15,7 @@ a {
     color: #455250;
 }
 
-.create-units .footman, .create-units .archer {
+.create-units .footman, .create-units .archer, .create-units .ballista {
     background: #B1BDB4;
 }
 .CodeMirror {

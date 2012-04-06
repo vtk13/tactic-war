@@ -1,4 +1,4 @@
-define(['game-entities/footman.js'], function(Footman) {
+define([], function() {
     function Player(logger, canvas)
     {
         this.units = [];
@@ -50,6 +50,9 @@ define(['game-entities/footman.js'], function(Footman) {
             }
             if (units[i].type == 'Archer') {
                 this.drawUnit(units[i], '#f5d277');
+            }
+            if (units[i].type == 'Ballista') {
+                this.drawUnit(units[i], '#7ba2d3');
             }
         }
     };

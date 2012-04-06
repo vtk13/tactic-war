@@ -17,6 +17,9 @@ define(function() {
 
         this.target = function()
         {
+            if (unit.target && unit.target.lives <= 0) {
+                unit.target = null;
+            }
             return unit.target;
         };
 

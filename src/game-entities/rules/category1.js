@@ -27,9 +27,9 @@ define(function() {
             },
             'archer': {
                 cost: 25
-//            },
-//            'ballista': {
-//                cost: 45
+            },
+            'ballista': {
+                cost: 45
             }
         };
     };

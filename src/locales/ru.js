@@ -32,6 +32,7 @@
 	"coins": "монет",
 	"you-have": "У вас",
 	"footman": "Пехотинец",
+	"ballista": "Баллиста",
 	"archer": "Лучник",
 	"prompt-name": "Название отряда:",
 	"button.pause": "Пауза",
