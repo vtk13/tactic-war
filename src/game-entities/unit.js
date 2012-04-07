@@ -82,6 +82,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
     {
         var target = action.target;
         if (this.canAttack(target)) {
+            this._set('direction', this.map.direction(this, action.target));
             target.hit(this.attackPoints());
         }
     };

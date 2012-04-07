@@ -30,7 +30,7 @@ define([], function() {
     Player.prototype.draw = function()
     {
         var ctx = this.c2d;
-        ctx.fillStyle = '#468966';
+        ctx.fillStyle = '#DCEBDD';
         ctx.fillRect(0, 0, 600, 300);
 
         var units = [];
@@ -68,14 +68,14 @@ define([], function() {
             ctx.closePath();
             ctx.fill();
             if (unit.selected) {
-                ctx.strokeStyle = '#fff';
+                ctx.strokeStyle = '#000';
                 ctx.stroke();
             }
 
             ctx.beginPath();
             ctx.moveTo(unit.x, unit.y);
             ctx.lineTo(unit.x + Math.cos(unit.direction) * size, unit.y + Math.sin(unit.direction) * size);
-            ctx.strokeStyle = '#000';
+            ctx.strokeStyle = '#fff';
             ctx.stroke();
 
             // live bar

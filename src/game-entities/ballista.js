@@ -14,6 +14,7 @@ define(['game-entities/unit.js'], function(Unit) {
     Ballista.prototype._doAttack = function(action)
     {
         var target = action.target;
+        this._set('direction', this.map.direction(this, action.target));
         var around = this.map.around(target.x, target.y, this.rules.ballistaSplashRadius());
         for (var i in around) {
             if (this.cohortId != around[i].cohortId) {

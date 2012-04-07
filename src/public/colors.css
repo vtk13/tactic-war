@@ -1,7 +1,7 @@
 /*
 possible theme http://kuler.adobe.com/#themeID/62938
-DCEBDD
-B1BDB4
+DCEBDD (CBDACC)
+CBDACC
 7F917E
 6B6A60
 455250
@@ -16,11 +16,15 @@ a {
 }
 
 .create-units .footman, .create-units .archer, .create-units .ballista {
-    background: #B1BDB4;
+    background: #CBDACC;
 }
 .code {
-    background: #B1BDB4;
+    background: #CBDACC;
     border-color: #455250;
+}
+
+ul.replay-list li, ul.cohort-list li {
+    background: #CBDACC;
 }
 
 canvas, .CodeMirror {
@@ -30,7 +34,6 @@ canvas, .CodeMirror {
 .inactive, .inactive a {
     color: #7F917E;
 }
-
-ul.replay-list li, ul.cohort-list li {
-    background: #B1BDB4;
+#menubar {
+    background: #CBDACC;
 }

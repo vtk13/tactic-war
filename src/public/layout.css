@@ -23,13 +23,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #menubar {
-    height: 80px;
+    overflow: hidden;
     z-index: 10;
     position: relative;
 }
 #menubar form {
     float: right;
-    width: 400px;
 }
 .login-fields {
     float: left;
@@ -114,7 +113,7 @@ img.unit {
 }
 
 h1 {
-    padding: 0 10px;
+    padding: 0 10px 10px;
 }
 h2 {
     margin-bottom: 5px;
