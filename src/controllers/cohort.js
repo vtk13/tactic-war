@@ -54,7 +54,8 @@ define(['restrict.js', 'db.js', 'game-entities/rules/list.js',
     function create(req, res)
     {
         res.render('cohort/create', {
-            rules: rulesList
+            rules: rulesList,
+            rule0: rulesList[0].getAllParams()
         });
     };
 
@@ -129,6 +130,20 @@ define(['restrict.js', 'db.js', 'game-entities/rules/list.js',
         });
     };
 
+    function deleteCohort(req, res)
+    {
+        var userId = req.session.user.id;
+        var cohortId = req.params.cohort_id;
+        db.query('DELETE FROM tw_cohorts WHERE user_id=? AND cohort_id=?',
+            [userId, cohortId], function(err, info) {
+                if (info.affectedRows == 1) {
+                    db.query('DELETE FROM tw_cohort_units WHERE cohort_id=?', [cohortId]);
+                }
+                res.redirect('back');
+            }
+        );
+    };
+
     function replays(req, res)
     {
         res.render('cohort/replays');
@@ -141,6 +156,7 @@ define(['restrict.js', 'db.js', 'game-entities/rules/list.js',
         app.post('/cohort/:cohort_id([0-9]+)/edit', restrict('auth'), doEdit);
         app.get('/cohort/:cohort_id([0-9]+)/load', restrict('auth'), load);
         app.get('/cohort/:cohort_id([0-9]+)/setout', restrict('auth'), setout);
+        app.get('/cohort/:cohort_id([0-9]+)/delete', restrict('auth'), deleteCohort);
         app.get('/cohort/:cohort_id([0-9]+)/replays', restrict('auth'), replays);
     };
 });

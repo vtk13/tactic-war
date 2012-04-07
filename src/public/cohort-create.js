@@ -1,4 +1,4 @@
-$(function() {
+requirejs(['game-entities/rules/list.js'], function(rulesList) {
     var coins;
 
     function setCoins(value)
@@ -52,5 +52,12 @@ $(function() {
     $('.create-field .ballista').live('click', function() {
         $(this).remove();
         setCoins(coins + 45);
+    });
+
+    $('form').submit(function() {
+        if (this.name.value == '') {
+            alert('Введите имя отряда');
+            return false;
+        }
     });
 });

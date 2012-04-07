@@ -1,6 +1,16 @@
 define(['restrict.js', 'db.js',
         'game-entities/managers/publish-manager.js',
         'game-entities/managers/replay-manager.js'], function(restrict, db, publishManager, replyaManager) {
+    function index(req, res)
+    {
+
+        replyaManager.list(null, function(replays) {
+            res.render('index', {
+                replays: replays
+            });
+        });
+    };
+
     function mypage(req, res)
     {
         var data = {
@@ -41,6 +51,7 @@ define(['restrict.js', 'db.js',
     };
 
     return function init(app) {
+        app.get('/', index);
         app.get('/mypage', restrict('auth'), mypage);
     };
 });

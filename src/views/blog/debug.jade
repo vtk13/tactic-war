@@ -1,0 +1,23 @@
+extends ../layout
+
+append styles
+    link(rel="stylesheet", href="/lib/codemirror/codemirror.css")
+
+append scripts
+    script(src="/lib/codemirror/codemirror.js")
+    script(src="/lib/codemirror/runmode.js")
+    script(src="/lib/codemirror/javascript.js")
+
+block content
+    .blog
+        h2 Пара способов отладки.
+        p
+            | Первый способ, это использовать в ваших стратегиях и тактиках функцию log(arg1, ...), которая
+            | выводит переданные параметры в консоль браузера. Открыть консоль в Chrome можно сочетанием Ctrl+Shift+I.
+        p
+            | Второй способ - это поставить breakpoint на строку:
+        pre.code
+            | eval(this.src);
+        p
+            | в файле code.js. Но так как на каждом шаге выполняются стратегии для отрядов и тактики для всех юнитов,
+            | вам нужно будет пропускать несколько остановок на breakpoint пока очередь не дойдет до нужной программы.

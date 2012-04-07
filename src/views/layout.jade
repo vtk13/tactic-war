@@ -22,21 +22,25 @@ html
 
     body
         #menubar
+            a(href='/')= __i('home-page')
             if user
-                a(href='/mypage')= __i('hello-username', user.email)
                 |&nbsp;
-                a(href='/logout')= __i('logout')
+                a(href='/mypage')= __i('my-page')
+                form
+                    a(href='/mypage')= __i('hello-username', user.email)
+                    |&nbsp;
+                    a(href='/logout')= __i('logout')
             else
-                p= __i('auth-caption')
                 form(method="post", action="/login")
-                    label
-                        = __i('promt-email')
-                        input(name="email")
-                    |&nbsp;
-                    label
-                        = __i('promt-password')
-                        input(name="password", type="password")
-                    |&nbsp;
+                    p= __i('auth-caption')
+                    .login-fields
+                        label
+                            span= __i('promt-email')
+                            input(name="email")
+                        label
+                            span= __i('promt-password')
+                            input(name="password", type="password")
                     button(type="submit")= __i('button-login')
             !{message}
-        block content
+        #content
+            block content

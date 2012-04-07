@@ -9,12 +9,41 @@ ul {
 
 html, body {
     height: 100%;
+    min-width: 1000px;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+    line-height: 150%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#menubar, #content {
+    padding: 5px;
 }
 
 #menubar {
     height: 80px;
     z-index: 10;
     position: relative;
+}
+#menubar form {
+    float: right;
+    width: 400px;
+}
+.login-fields {
+    float: left;
+    width: 260px;
+}
+.login-fields label {
+    display: block;
+}
+.login-fields label span {
+    float: left;
+    width: 100px;
+}
+.login-fields label input {
+    width: 150px;
 }
 
 #my-setouts, #last-replays, #profile {
@@ -37,23 +66,19 @@ html, body {
 
 .create-units {
     float: left;
-    width: 30%;
+    width: 50%;
     height: 400px;
 }
 .create-field {
     float: left;
-    width: 70%;
+    width: 50%;
     height: 400px;
 }
 
-.code-editor {
+.code-editor, .edit-field, #index-replays, #index-blog {
     float: left;
-    width: 50%;
-    height: 400px;
-}
-.edit-field {
-    float: left;
-    width: 50%;
+    width: 48%;
+    padding: 0 10px;
     height: 400px;
 }
 .replay-field {
@@ -87,6 +112,9 @@ img.unit {
     border-style: solid;
 }
 
+h1 {
+    padding: 0 10px;
+}
 h2 {
     margin-bottom: 5px;
 }
@@ -100,8 +128,10 @@ li p {
     margin: 0;
 }
 
-canvas {
-    margin: 7px 0;
+canvas, .CodeMirror {
+    margin: 10px 0;
+    border-style: solid;
+    border-width: 1px;
 }
 span.date {
     font-size: 80%;
@@ -114,4 +144,21 @@ ul.replay-list, ul.cohort-list {
 ul.replay-list li, ul.cohort-list li {
     margin: 5px 10px 5px 0;
     padding: 5px;
+}
+.code {
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    float: left;
+    min-width: 300px;
+    margin: 0 0 10px 10px;
+}
+.code + * {
+    clear: left;
+}
+
+.blog {
+    width: 800px;
+    margin: 0 auto;
+    text-align: justify;
 }

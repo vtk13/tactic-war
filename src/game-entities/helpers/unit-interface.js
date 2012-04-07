@@ -1,6 +1,8 @@
 define(function() {
     function UnitInterface(unit)
     {
+        this.store = {};
+
         this.move = function(l) {
             unit.move(l);
         };
@@ -81,7 +83,7 @@ define(function() {
 
         this.log = function(str)
         {
-            console.log(str);
+            console.log.apply(console, arguments);
         };
     }
 

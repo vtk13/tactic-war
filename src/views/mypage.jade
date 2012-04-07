@@ -8,9 +8,13 @@ block content
         ul.cohort-list
             each cohort in cohorts
                 li.cohort
-                    a(href='/cohort/'+cohort.cohort_id+'/edit')= cohort.cohort_name
-                    |&nbsp;
-                    a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
+                    p= cohort.cohort_name
+                    p
+                        a(href='/cohort/'+cohort.cohort_id+'/edit')= __i('edit')
+                        |&nbsp;
+                        a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
+                        |&nbsp;
+                        a(href='/cohort/'+cohort.cohort_id+'/delete', confirm= __i('confirm.delete'))= __i('delete')
         .create
             a(href='/cohort/create')= __i('cohort-create')
     #my-setouts
@@ -28,7 +32,7 @@ block content
                         a(href='/setout/' + publish.id + '/replays')= __i('view-replays')
                         if publish.active
                             |&nbsp;
-                            a(href='/setout/' + publish.id + '/hide')= __i('hide-publish')
+                            a(href='/setout/' + publish.id + '/hide', confirm= __i('confirm.hide'))= __i('hide-publish')
     #last-replays
         h2
             = __i('last-replays')

@@ -1,4 +1,21 @@
 extends layout
 
 block content
-    div index
+    p
+        | Tactic-wars - игра для программистов. Ваша задача запрограммировать отряд из пехоты, лучников
+        | и баллист для сражения с подобными отрядами других пользователей.
+    #index-blog
+        h2= __i('blog')
+        ul
+            li: a(href="/blog/hello-world") 1. Как создать свой первый отряд.
+            li: a(href="/blog/debug") 2. Пара способов отладки.
+    #index-replays
+        h2= __i('header.last-replays')
+        ul.replay-list
+            each replay in replays
+                li
+                    p
+                        a(href='/replay/' + replay.id)= replay.publish1Name + ' (' + replay.publish1Rate + ') VS. ' + replay.publish2Name + ' (' + replay.publish2Rate + ')'
+                    p
+                        span= replay.result + ' '
+                        span.date= replay.time.format('dd-mm-yyyy HH:MM')

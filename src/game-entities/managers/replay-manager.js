@@ -8,7 +8,7 @@ define(['db.js'], function(db) {
                     ' JOIN tw_publishes p2 ON b.publish2_id=p2.publish_id ' +
   (publishId ? 'WHERE ? IN (b.publish1_id, b.publish2_id)' : '') +
             'ORDER BY battle_time DESC ' +
-               'LIMIT 10';
+               'LIMIT 10'; // todo
             db.query(sql, publishId ? [publishId] : [], function(err, result) {
                 var replays = [];
                 for (var i in result) {

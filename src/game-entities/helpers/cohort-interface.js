@@ -1,17 +1,21 @@
 define(function() {
     function CohortInterface(cohort)
     {
+        this.store = {};
+
         this.confederates = function() {
             var res = [];
             for (var i in cohort.units) {
                 var unit = cohort.units[i];
-                res.push({
-                    id: unit.id,
-                    type: unit.constructor.name,
-                    lives: unit.lives,
-                    x: unit.x,
-                    y: unit.y
-                });
+                if (unit.lives > 0) {
+                    res.push({
+                        id: unit.id,
+                        type: unit.constructor.name,
+                        lives: unit.lives,
+                        x: unit.x,
+                        y: unit.y
+                    });
+                }
             }
             return res;
         };
@@ -29,20 +33,22 @@ define(function() {
             var res = [];
             for (var i in cohort.enemies.units) {
                 var unit = cohort.enemies.units[i];
-                res.push({
-                    id: unit.id,
-                    type: unit.constructor.name,
-                    lives: unit.lives,
-                    x: unit.x,
-                    y: unit.y
-                });
+                if (unit.lives > 0) {
+                    res.push({
+                        id: unit.id,
+                        type: unit.constructor.name,
+                        lives: unit.lives,
+                        x: unit.x,
+                        y: unit.y
+                    });
+                }
             }
             return res;
         };
 
         this.log = function(str)
         {
-            console.log(str);
+            console.log.apply(console, arguments);
         };
     }
 

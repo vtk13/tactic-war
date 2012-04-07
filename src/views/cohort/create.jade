@@ -7,24 +7,48 @@ block content
     h1= __i('cohort-create')
     form(action="/cohort/create", method="post")
         .create-units
-            .name
+            p.name
                 = __i('prompt-name')
                 input(name="name")
             p= __i('rule-desc')
-            select.category(name="category")
-                each rule, id in rules
-                    option(value=id)= __i(rule.name())
+                select.category(name="category")
+                    each rule, id in rules
+                        option(value=id)= __i(rule.name())
             each rule, id in rules
                 p(class='rule-desc rule'+id+'-desc')= __i('rule'+id+'-desc')
             .footman
-                img(src="/public/images/footman.png", class="unit")
-                = __i('footman') + ': ' + 20 + ' ' + __i('coins')
+                p
+                    img(src="/public/images/footman.png", class="unit")
+                    = __i('footman') + ': '
+                    = __i('label.cost') + rule0.footmanCost + ' ' + __i('coins') + ', '
+                    = __i('label.speed') + rule0.footmanSpeed + ', '
+                    = __i('label.lives') + rule0.footmanLives
+                p
+                    = __i('label.armor') + rule0.footmanArmor + ', '
+                    = __i('label.attack') + rule0.footmanAttack + ', '
+                    = __i('label.attack-distance') + rule0.footmanAttackDistance
             .archer
-                img(src="/public/images/archer.png", class="unit")
-                = __i('archer') + ': ' + 25 + ' ' + __i('coins')
+                p
+                    img(src="/public/images/archer.png", class="unit")
+                    = __i('archer') + ': '
+                    = __i('label.cost') + rule0.archerCost + ' ' + __i('coins') + ', '
+                    = __i('label.speed') + rule0.archerSpeed + ', '
+                    = __i('label.lives') + rule0.archerLives
+                p
+                    = __i('label.armor') + rule0.archerArmor + ', '
+                    = __i('label.attack') + rule0.archerAttack + ', '
+                    = __i('label.attack-distance') + rule0.archerAttackDistance
             .ballista
-                img(src="/public/images/ballista.png", class="unit")
-                = __i('ballista') + ': ' + 45 + ' ' + __i('coins')
+                p
+                    img(src="/public/images/ballista.png", class="unit")
+                    = __i('ballista') + ': '
+                    = __i('label.cost') + rule0.ballistaCost + ' ' + __i('coins') + ', '
+                    = __i('label.speed') + rule0.ballistaSpeed + ', '
+                    = __i('label.lives') + rule0.ballistaLives
+                p
+                    = __i('label.armor') + rule0.ballistaArmor + ', '
+                    = __i('label.attack') + rule0.ballistaAttack + ', '
+                    = __i('label.attack-distance') + rule0.ballistaAttackDistance
             .coins
                 = __i('you-have')
                 |&nbsp;

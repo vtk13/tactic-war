@@ -51,6 +51,19 @@ define(function() {
         return nearest;
     };
 
+    Map.prototype.around = function(x, y, radius)
+    {
+        var res = [];
+        for (var i in this.items) {
+            var dx = x - this.items[i].x;
+            var dy = y - this.items[i].y;
+            if (Math.sqrt(dx*dx + dy*dy) <= radius) {
+                res.push(this.items[i]);
+            }
+        }
+        return res;
+    };
+
     Map.prototype.nearest = function(unit, filter)
     {
         var unitIndex = this.find(unit);

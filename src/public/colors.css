@@ -18,7 +18,12 @@ a {
 .create-units .footman, .create-units .archer, .create-units .ballista {
     background: #B1BDB4;
 }
-.CodeMirror {
+.code {
+    background: #B1BDB4;
+    border-color: #455250;
+}
+
+canvas, .CodeMirror {
     border-color: #455250;
 }
 

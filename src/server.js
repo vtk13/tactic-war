@@ -8,8 +8,9 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
         'controllers/profile.js',
         'controllers/replay.js',
         'controllers/setout.js',
+        'controllers/blog.js',
         'game-runner/battle-runner.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile,
-                                                  replay, setout, battleRunner) {
+                                                  replay, setout, blog, battleRunner) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
         console.log(err.stack);
@@ -53,10 +54,6 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
         }
     });
 
-    app.get('/', function(req, res) {
-        res.render('index');
-    });
-
     user(app);
 
     app.get('/sandbox', function(req, res) {
@@ -69,9 +66,14 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
     profile(app);
     replay(app);
     setout(app);
+    blog(app);
 
     app.get('/help/api', function(req, res) {
         res.render('help/api');
+    });
+
+    app.get('/help/units', function(req, res) {
+        res.render('help/units');
     });
 
     app.listen(3000);

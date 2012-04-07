@@ -13,9 +13,12 @@ block content
     .code-editor
         h2= __i('code-editor')
         input(type="hidden",name="cohort_id",value=cohort.id)
+        = __i('label.code-select')
         select(name="tactic")
             option(value="none") none
+        = __i('label.code-name')
         input(name="name")
+        | &nbsp;
         button#save Save
         textarea(id="code-src", name="src")
         p
@@ -31,13 +34,13 @@ block content
             select(name="enemy")
                 each enemy in cohorts
                     option(value=enemy.cohort_id)= enemy.cohort_name
-            Стратегия противника:
+            = __i('label.enemy-strategy')
             select(name="enemy-strategy")
         canvas(id="field",width="600",height="300")
         .controls
-            тактика юнита:
+            = __i('label.unit-tactic')
             select(name="unit-tactic")
-            Стратегия отрядя:
+            = __i('label.cohort-strategy')
             select(name="cohort-strategy")
         .controls
             button(class="step")= __i('play-step')

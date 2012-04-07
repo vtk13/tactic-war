@@ -11,6 +11,17 @@ define(['game-entities/unit.js'], function(Unit) {
     Ballista.prototype = new Unit();
     Ballista.prototype.constructor = Ballista;
 
+    Ballista.prototype._doAttack = function(action)
+    {
+        var target = action.target;
+        var around = this.map.around(target.x, target.y, this.rules.ballistaSplashRadius());
+        for (var i in around) {
+            if (this.cohortId != around[i].cohortId) {
+                around[i].hit(this.attackPoints());
+            }
+        }
+    };
+
     Ballista.prototype.attackDistance = function()
     {
         return this.rules.ballistaAttackDistance();

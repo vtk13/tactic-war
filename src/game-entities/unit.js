@@ -48,21 +48,11 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
             if (action) {
                 switch (action.action) {
                     case 'move':
-                        var distance = action.distance;
-                        var speed = this.speedPoints();
-                        if (action.distance > speed) {
-                            action.distance = action.distance - speed;
-                            this.actionQueue.unshift(action);
-                            distance = speed;
-                        }
-                        this.map.move(this, distance);
+                        this._doMove(action);
                         actions--;
                         break;
                     case 'attack':
-                        var target = action.target;
-                        if (this.canAttack(target)) {
-                            target.hit(this.attackPoints());
-                        }
+                        this._doAttack(action);
                         actions--;
                         break;
                     case 'turn':
@@ -73,6 +63,26 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
             } else {
                 break;
             }
+        }
+    };
+
+    Unit.prototype._doMove = function(action)
+    {
+        var distance = action.distance;
+        var speed = this.speedPoints();
+        if (action.distance > speed) {
+            action.distance = action.distance - speed;
+            this.actionQueue.unshift(action);
+            distance = speed;
+        }
+        this.map.move(this, distance);
+    };
+
+    Unit.prototype._doAttack = function(action)
+    {
+        var target = action.target;
+        if (this.canAttack(target)) {
+            target.hit(this.attackPoints());
         }
     };
 
