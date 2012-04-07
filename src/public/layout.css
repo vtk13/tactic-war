@@ -95,10 +95,11 @@ h1, h2, h3, h4, h5, h6 {
 .create-units .footman, .create-units .archer, .create-units .ballista {
     padding: 5px;
     margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 .create-field .footman, .create-field .archer, .create-field .ballista {
-    float: left
+    float: left;
 }
 img.unit {
     padding: 0 7px;
@@ -128,6 +129,10 @@ li p {
     margin: 0;
 }
 
+button {
+    padding: 0 5px;
+}
+
 canvas, .CodeMirror {
     margin: 10px 0;
     border-style: solid;
@@ -144,10 +149,12 @@ ul.replay-list, ul.cohort-list {
 ul.replay-list li, ul.cohort-list li {
     margin: 5px 10px 5px 0;
     padding: 5px;
+    border-radius: 5px;
 }
 .code {
     border-style: solid;
     border-width: 1px;
+    border-radius: 5px;
     padding: 5px;
     float: left;
     min-width: 300px;
