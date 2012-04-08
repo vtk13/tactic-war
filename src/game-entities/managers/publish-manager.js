@@ -16,6 +16,7 @@ define(['db.js', 'game-entities/managers/code-manager.js'], function(db, codeMan
                             id:         result[i].publish_id,
                             userId:     result[i].user_id,
                             cohortId:   result[i].cohort_id,
+                            status:     result[i].publish_approved,
                             name:       result[i].publish_name,
                             active:     result[i].publish_active,
                             date:       result[i].publish_date,
@@ -30,25 +31,47 @@ define(['db.js', 'game-entities/managers/code-manager.js'], function(db, codeMan
 
         load: function(publishId, cb)
         {
-            db.query('SELECT * FROM tw_publishes WHERE publish_id=?', [publishId], function(error, result, fields) {
-                var publish = null;
-                if (!error && result.length == 1) {
-                    publish = {
-                        id:         result[0].publish_id,
-                        userId:     result[0].user_id,
-                        cohortId:   result[0].cohort_id,
-                        rulesId:    result[0].rules_id,
-                        name:       result[0].publish_name,
-                        active:     result[0].publish_active,
-                        date:       result[0].publish_date,
-                        rate:       parseFloat(result[0].publish_rate),
-                        strategy:   result[0].publish_strategy ? JSON.parse(result[0].publish_strategy) : null,
-                        units:      result[0].publish_units ? JSON.parse(result[0].publish_units) : null,
-                        tactics:    result[0].publish_tactics ? JSON.parse(result[0].publish_tactics) : null
-                    };
-                }
-                cb(error, publish);
-            });
+            if (publishId == 0) {
+                var publish = {
+                    id:         -1,
+                    userId:     0,
+                    cohortId:   -1,
+                    rulesId:    0,
+                    name:       'dummy',
+                    active:     1,
+                    date:       new Date(),
+                    rate:       1200,
+                    strategy:   null,
+                    units:      [{id: -1, type: "footman", tacticId: 0},
+                                 {id: -2, type: "footman", tacticId: 0},
+                                 {id: -3, type: "footman", tacticId: 0},
+                                 {id: -4, type: "footman", tacticId: 0},
+                                 {id: -5, type: "footman", tacticId: 0}],
+                    tactics:    null
+                };
+                cb(undefined, publish);
+            } else {
+                db.query('SELECT * FROM tw_publishes WHERE publish_id=?', [publishId], function(error, result, fields) {
+                    var publish = null;
+                    if (!error && result.length == 1) {
+                        publish = {
+                            id:         result[0].publish_id,
+                            userId:     result[0].user_id,
+                            cohortId:   result[0].cohort_id,
+                            rulesId:    result[0].rules_id,
+                            status:     result[0].publish_approved,
+                            name:       result[0].publish_name,
+                            active:     result[0].publish_active,
+                            date:       result[0].publish_date,
+                            rate:       parseFloat(result[0].publish_rate),
+                            strategy:   result[0].publish_strategy ? JSON.parse(result[0].publish_strategy) : null,
+                            units:      result[0].publish_units ? JSON.parse(result[0].publish_units) : null,
+                            tactics:    result[0].publish_tactics ? JSON.parse(result[0].publish_tactics) : null
+                        };
+                    }
+                    cb(error, publish);
+                });
+            }
         },
 
         setout: function(cohort, cb) {

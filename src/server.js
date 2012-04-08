@@ -10,7 +10,7 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
         'controllers/setout.js',
         'controllers/blog.js',
         'game-runner/battle-runner.js'], function(express, i18n, dateFormat, user, cohort, code, unit, profile,
-                                                  replay, setout, blog, battleRunner) {
+                                                  replay, setout, blog, BattleRunner) {
     process.addListener('uncaughtException', function(err) {
         console.log('Uncaught exception: ' + err);
         console.log(err.stack);
@@ -68,18 +68,10 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
     setout(app);
     blog(app);
 
-    app.get('/help/api', function(req, res) {
-        res.render('help/api');
-    });
-
-    app.get('/help/units', function(req, res) {
-        res.render('help/units');
-    });
-
     app.listen(3000);
     console.log('Server started at port 3000');
 
-    var runner = new battleRunner();
+    var runner = new BattleRunner();
 //    runner.run();
     setInterval(function() {
         runner.run();

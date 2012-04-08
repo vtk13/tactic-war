@@ -49,6 +49,9 @@ define(['game-entities/managers/publish-manager.js',
         var self = this;
         this._loadPublishes(function(publish1, publish2) {
             var rules = rulesList[publish1.rulesId];
+            if (self.publish2 == 0) {
+                publish2.rulesId = publish1.rulesId;
+            }
             var cohort1 = self.createCohort(publish1);
             var cohort2 = self.createCohort(publish2);
             var game = new Game(cohort1, cohort2);

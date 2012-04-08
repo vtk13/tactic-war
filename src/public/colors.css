@@ -37,3 +37,13 @@ canvas, .CodeMirror {
 #menubar {
     background: #CBDACC;
 }
+
+.status.pending {
+    color: #bbb;
+}
+.status.rejected {
+    color: #f00;
+}
+.inactive .status.rejected {
+    color: inherit;
+}

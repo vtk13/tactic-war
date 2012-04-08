@@ -46,10 +46,14 @@ define(function() {
             return res;
         };
 
-        this.log = function(str)
-        {
-            console.log.apply(console, arguments);
-        };
+        if (typeof window == undefined) {
+            this.log = function(str) {};
+        } else {
+            this.log = function(str)
+            {
+                console.log.apply(console, arguments);
+            };
+        }
     }
 
     return CohortInterface;

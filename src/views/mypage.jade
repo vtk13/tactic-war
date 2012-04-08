@@ -12,7 +12,7 @@ block content
                     p
                         a(href='/cohort/'+cohort.cohort_id+'/edit')= __i('edit')
                         |&nbsp;
-                        a(href='/cohort/'+cohort.cohort_id+'/setout')= __i('set-out')
+                        a(href='/cohort/'+cohort.cohort_id+'/setout', confirm= __i('confirm.setout'))= __i('set-out')
                         |&nbsp;
                         a(href='/cohort/'+cohort.cohort_id+'/delete', confirm= __i('confirm.delete'))= __i('delete')
         .create
@@ -23,6 +23,7 @@ block content
             each publish in publishes
                 li(class='cohort' + (publish.active ? '' : ' inactive'))
                     span= publish.name
+                        span(class='status ' + publish.status)= ' ' + publish.status
                         span.date= ' ' + publish.date.format('dd-mm-yyyy HH:MM')
                     p
                         span.battles= __i('publish.battles') + ': ' + publish.battles

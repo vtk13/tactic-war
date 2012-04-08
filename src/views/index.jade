@@ -2,13 +2,14 @@ extends layout
 
 block content
     p
-        | Tactic-wars - игра для программистов. Ваша задача - используя JavaScript запрограммировать отряд,
-        | состоящий из пехоты, лучников и баллист для сражения с подобными отрядами других пользователей.
+        | Tactic Wars - игра для программистов. Ваша задача - используя JavaScript запрограммировать отряд
+        | из пехоты, лучников и баллист для сражения с подобными отрядами других пользователей.
     #index-blog
         h2= __i('blog')
-        ul
-            li: a(href="/blog/hello-world") 1. Как создать свой первый отряд.
-            li: a(href="/blog/debug") 2. Пара способов отладки.
+        ol
+            li: a(href="/blog/hello-world") Как создать свой первый отряд
+            li: a(href="/blog/debug") Пара способов отладки
+            li: a(href="/blog/api") Tactic Wars API
     #index-replays
         h2= __i('header.last-replays')
         ul.replay-list
