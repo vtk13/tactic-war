@@ -32,8 +32,8 @@ define(function() {
             if (y < 0) y = 0;
             if (x > this.width) x = this.width;
             if (y > this.height) y = this.height;
-            unit._set('x', unit.x + Math.cos(unit.direction) * distance);
-            unit._set('y', unit.y + Math.sin(unit.direction) * distance);
+            unit._set('x', x);
+            unit._set('y', y);
         }
     };
 
