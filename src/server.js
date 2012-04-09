@@ -75,5 +75,5 @@ requirejs(['express', 'i18n', 'lib/date-format.js',
 //    runner.run();
     setInterval(function() {
         runner.run();
-    }, 60000);
+    }, 10000);
 });

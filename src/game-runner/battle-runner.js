@@ -11,7 +11,7 @@ define(['db.js', 'game-runner/battle.js', 'child_process',
         var sql1 =
             'SELECT publish_id\
                FROM tw_publishes\
-              WHERE publish_approved="pending"\
+              WHERE publish_active=1 AND publish_approved="pending"\
               LIMIT 1';
 
         var sql2 =

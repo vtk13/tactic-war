@@ -3,8 +3,11 @@ define(function() {
     {
         this.store = {};
 
-        this.move = function(l) {
-            unit.move(l);
+        this.move = function(distance)
+        {
+            if (distance > 0) {
+                unit.move(distance);
+            }
         };
 
         this.attack = function(target)

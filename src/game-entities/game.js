@@ -22,16 +22,30 @@ define(['game-entities/map.js'], function(Map) {
      */
     Game.prototype.step = function()
     {
-        if (this.cohort1.alives()) {
+        var units1 = this.cohort1.alives();
+        if (units1.length > 0) {
             this.cohort1.step();
         } else {
             return {winner: this.cohort2};
         }
-        if (this.cohort2.alives()) {
+        var units2 = this.cohort2.alives();
+        if (units2.length > 0) {
             this.cohort2.step();
         } else {
             return {winner: this.cohort1};
         }
+
+        var units = units1.concat(units2);
+        for (var i in units) {
+            units[i].random = Math.random();
+        }
+        units.sort(function(u1, u2) {
+            return u1.random - u2.random;
+        });
+        for (var i in units) {
+            units[i].step();
+        }
+
         return false; // game over? no! -> false
     };
 

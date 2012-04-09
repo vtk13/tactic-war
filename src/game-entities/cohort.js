@@ -18,26 +18,20 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
 
     Cohort.prototype.alives = function()
     {
+        var res = [];
         for (var i in this.units) {
             if (this.units[i].lives > 0) {
-                return true;
+                res.push(this.units[i]);
             }
         }
-        return false;
+        return res;
     };
 
     Cohort.prototype.step = function()
     {
-        var res = [];
         if (this.strategy) {
             this.strategy.execute(this.sandbox);
         }
-        for (var i in this.units) {
-            if (this.units[i].lives > 0) {
-                res.push(this.units[i].step());
-            }
-        }
-        return res;
     };
 
     Cohort.prototype.contain = function(unit)
@@ -48,11 +42,6 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
             }
         }
         return false;
-    };
-
-    Cohort.prototype.test = function(param)
-    {
-        console.log(param);
     };
 
     return Cohort;

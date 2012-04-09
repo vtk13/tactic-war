@@ -9,7 +9,13 @@ define(['restrict.js', 'db.js'], function(restrict, db) {
     function load(req, res)
     {
         var replayId = req.params.replay_id;
-        db.query('SELECT * FROM tw_battles WHERE battle_id=?', [replayId], function(err, result, fields) {
+        db.query(
+            'SELECT b.*, p1.publish_name publish1_name, p1.publish_rate publish1_rate,' +
+                       ' p2.publish_name publish2_name, p2.publish_rate publish2_rate' +
+             ' FROM tw_battles b' +
+                  ' JOIN tw_publishes p1 ON b.publish1_id=p1.publish_id' +
+                  ' JOIN tw_publishes p2 ON b.publish2_id=p2.publish_id' +
+            ' WHERE b.battle_id=?', [replayId], function(err, result, fields) {
             res.json(result[0]);
         });
     }

@@ -15,6 +15,7 @@ html, body {
     min-width: 1000px;
     font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
     line-height: 150%;
+    text-align: justify;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -81,9 +82,6 @@ h1, h2, h3, h4, h5, h6 {
     float: left;
     width: 48%;
     padding: 0 10px;
-    height: 400px;
-}
-.replay-field {
     height: 400px;
 }
 
@@ -169,5 +167,10 @@ ul.replay-list li, ul.cohort-list li {
 .blog {
     width: 800px;
     margin: 0 auto;
-    text-align: justify;
+}
+span.winner {
+    display: none;
+}
+.publish1 span, .publish2 span {
+    padding-right: 10px;
 }

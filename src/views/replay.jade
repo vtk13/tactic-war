@@ -5,6 +5,14 @@ append scripts
 
 block content
     h1= __i('replay-view')
+    .publish2
+        span.name
+        span.rate
+        span.winner= __i('winner')
     .replay-field
         input(type="hidden", name="replayId", value=replayId)
         canvas(id="field",width="600",height="300")
+    .publish1
+        span.name
+        span.rate
+        span.winner= __i('winner')

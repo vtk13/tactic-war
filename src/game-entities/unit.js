@@ -12,6 +12,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this.tactic = tactic;
         this.rules = rules;
         this.lives = this.maxLives();
+        this.target = null;
 
         this.actionQueue = [];
         this.sandbox = new UnitInterface(this);
@@ -94,7 +95,9 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
 
     Unit.prototype.move = function(distance)
     {
-        this.actionQueue.push({action: 'move', distance: distance});
+        if (distance > 0) {
+            this.actionQueue.push({action: 'move', distance: distance});
+        }
     };
 
     Unit.prototype.attack = function(target)
