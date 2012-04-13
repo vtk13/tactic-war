@@ -74,17 +74,7 @@ define(function() {
             unit.turn(direction);
         };
 
-        this.queueSize = function()
-        {
-            return unit.actionQueue.length;
-        };
-
-        this.resetQueue = function()
-        {
-            unit.actionQueue = [];
-        };
-
-        if (typeof window == undefined) {
+        if (typeof window == 'undefined') {
             this.log = function(str) {};
         } else {
             this.log = function(str)

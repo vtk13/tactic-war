@@ -46,7 +46,7 @@ define(function() {
             return res;
         };
 
-        if (typeof window == undefined) {
+        if (typeof window == 'undefined') {
             this.log = function(str) {};
         } else {
             this.log = function(str)

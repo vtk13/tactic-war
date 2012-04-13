@@ -14,7 +14,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this.lives = this.maxLives();
         this.target = null;
 
-        this.actionQueue = [];
+        this.actionPoints = 1;
         this.sandbox = new UnitInterface(this);
     };
 
@@ -41,50 +41,9 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
 
     Unit.prototype.step = function()
     {
-        if (!this.tactic) return;
-        this.tactic.execute(this.sandbox);
-        var actions = 1;
-        while (actions) {
-            var action = this.actionQueue.shift();
-            if (action) {
-                switch (action.action) {
-                    case 'move':
-                        this._doMove(action);
-                        actions--;
-                        break;
-                    case 'attack':
-                        this._doAttack(action);
-                        actions--;
-                        break;
-                    case 'turn':
-                        this._set('direction', action.direction);
-                        // costs nothing so no "actions--"
-                        break;
-                }
-            } else {
-                break;
-            }
-        }
-    };
-
-    Unit.prototype._doMove = function(action)
-    {
-        var distance = action.distance;
-        var speed = this.speedPoints();
-        if (action.distance > speed) {
-            action.distance = action.distance - speed;
-            this.actionQueue.unshift(action);
-            distance = speed;
-        }
-        this.map.move(this, distance);
-    };
-
-    Unit.prototype._doAttack = function(action)
-    {
-        var target = action.target;
-        if (this.canAttack(target)) {
-            this._set('direction', this.map.direction(this, action.target));
-            target.hit(this.attackPoints());
+        this.actionPoints = 1;
+        if (this.tactic) {
+            this.tactic.execute(this.sandbox);
         }
     };
 
@@ -95,19 +54,26 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
 
     Unit.prototype.move = function(distance)
     {
-        if (distance > 0) {
-            this.actionQueue.push({action: 'move', distance: distance});
+        if (this.actionPoints && distance > 0) {
+            distance = Math.min(distance, this.speedPoints());
+            this.map.move(this, distance);
+            this.actionPoints--;
         }
     };
 
     Unit.prototype.attack = function(target)
     {
-        this.actionQueue.push({action: 'attack', target: this.map.fetch(target)});
+        target = this.map.fetch(target);
+        if (this.actionPoints && this.canAttack(target)) {
+            this.turn(this.map.direction(this, target));
+            target.hit(this.attackPoints());
+            this.actionPoints--;
+        }
     };
 
     Unit.prototype.turn = function(direction)
     {
-        this.actionQueue.push({action: 'turn', direction: direction});
+        this._set('direction', direction);
     };
 
     return Unit;
