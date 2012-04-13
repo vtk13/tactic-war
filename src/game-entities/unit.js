@@ -11,7 +11,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this.id = id;
         this.tactic = tactic;
         this.rules = rules;
-        this.lives = this.maxLives();
+        this.health = this.maxHealth();
         this.target = null;
 
         this.actionPoints = 1;
@@ -24,14 +24,14 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
     };
 
     Unit.prototype.attackDistance   = function() { throw new Error('Subclass responsibility'); };
-    Unit.prototype.maxLives         = function() { throw new Error('Subclass responsibility'); };
+    Unit.prototype.maxHealth        = function() { throw new Error('Subclass responsibility'); };
     Unit.prototype.attackPoints     = function() { throw new Error('Subclass responsibility'); };
     Unit.prototype.armorPoints      = function() { throw new Error('Subclass responsibility'); };
     Unit.prototype.speedPoints      = function() { throw new Error('Subclass responsibility'); };
 
     Unit.prototype.hit = function(attack)
     {
-        this._set('lives', this.lives - attack - this.armorPoints());
+        this._set('health', this.health - attack - this.armorPoints());
     };
 
     Unit.prototype.setTarget = function(unit)

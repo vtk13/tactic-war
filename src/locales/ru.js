@@ -43,7 +43,7 @@
 	"label.rate": "Рейтинг: ",
 	"label.cost": "Цена: ",
 	"label.speed": "Скорость: ",
-	"label.lives": "Жизни: ",
+	"label.health": "Жизни: ",
 	"label.armor": "Броня: ",
 	"label.attack": "Атака: ",
 	"label.attack-distance": "Расстояние атаки: ",

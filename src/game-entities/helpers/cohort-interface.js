@@ -7,11 +7,11 @@ define(function() {
             var res = [];
             for (var i in cohort.units) {
                 var unit = cohort.units[i];
-                if (unit.lives > 0) {
+                if (unit.health > 0) {
                     res.push({
                         id: unit.id,
                         type: unit.constructor.name,
-                        lives: unit.lives,
+                        health: unit.health,
                         x: unit.x,
                         y: unit.y
                     });
@@ -33,11 +33,11 @@ define(function() {
             var res = [];
             for (var i in cohort.enemies.units) {
                 var unit = cohort.enemies.units[i];
-                if (unit.lives > 0) {
+                if (unit.health > 0) {
                     res.push({
                         id: unit.id,
                         type: unit.constructor.name,
-                        lives: unit.lives,
+                        health: unit.health,
                         x: unit.x,
                         y: unit.y
                     });

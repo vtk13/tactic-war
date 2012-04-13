@@ -33,9 +33,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.ballistaAttackDistance();
     };
 
-    Ballista.prototype.maxLives = function()
+    Ballista.prototype.maxHealth = function()
     {
-        return this.rules.ballistaLives();
+        return this.rules.ballistaHealth();
     };
 
     Ballista.prototype.attackPoints = function()

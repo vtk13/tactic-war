@@ -46,7 +46,7 @@
 	"label.cost": "Cost: ",
 	"coins": "coins",
 	"label.speed": "Speed: ",
-	"label.lives": "Lives: ",
+	"label.health": "Health: ",
 	"label.armor": "Armor: ",
 	"label.attack": "Attack: ",
 	"label.attack-distance": "Attack distance: ",

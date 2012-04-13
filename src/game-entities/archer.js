@@ -16,9 +16,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.archerAttackDistance();
     };
 
-    Archer.prototype.maxLives = function()
+    Archer.prototype.maxHealth = function()
     {
-        return this.rules.archerLives();
+        return this.rules.archerHealth();
     };
 
     Archer.prototype.attackPoints = function()

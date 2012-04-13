@@ -22,7 +22,7 @@ define(function() {
 
         this.target = function()
         {
-            if (unit.target && unit.target.lives <= 0) {
+            if (unit.target && unit.target.health <= 0) {
                 unit.target = null;
             }
             return unit.target;
@@ -33,7 +33,7 @@ define(function() {
             return {
                 id: unit.id,
                 type: unit.constructor.name,
-                lives: unit.lives,
+                health: unit.health,
                 x: unit.x,
                 y: unit.y
             };
@@ -42,13 +42,13 @@ define(function() {
         this.nearest = function()
         {
             var res = unit.map.nearest(unit, function(_unit) {
-                return _unit.lives > 0 && _unit.cohortId != unit.cohortId;
+                return _unit.health > 0 && _unit.cohortId != unit.cohortId;
             });
             if (res) {
                 return {
                     id: res.id,
                     type: res.constructor.name,
-                    lives: res.lives,
+                    health: res.health,
                     x: res.x,
                     y: res.y
                 };

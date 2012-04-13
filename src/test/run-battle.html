@@ -14,7 +14,7 @@
             var tactic = new Code(
 "resetQueue();\
 var _target = target();\
-if (!_target || _target.lives <= 0) {\
+if (!_target || _target.health <= 0) {\
     _target = nearest();\
 }\
 if (canAttack(_target)) {\
@@ -27,7 +27,7 @@ if (canAttack(_target)) {\
             var cohort1 = new Cohort([new Footman(tactic, rules), new Footman(tactic, rules), new Footman(tactic, rules)], new Code(
 "var _enemies = enemies(), _confederates = confederates();\
 for (var i in _enemies) {\
-    if (_enemies[i].lives > 0) {\
+    if (_enemies[i].health > 0) {\
         for (var j in _confederates) {\
             setTarget(_confederates[j], _enemies[i])\
         }\

@@ -61,7 +61,7 @@ define([], function() {
     {
         var ctx = this.c2d;
         var size = 7;
-        if (unit.lives > 0) {
+        if (unit.health > 0) {
             ctx.fillStyle = color;
             ctx.beginPath();
             ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
@@ -85,7 +85,7 @@ define([], function() {
             ctx.strokeStyle = '#FFF0A5';
             ctx.stroke();
 
-            var livePercent = unit.lives / unit.maxLives;
+            var livePercent = unit.health / unit.maxHealth;
 
             ctx.beginPath();
             ctx.moveTo(unit.x - size, unit.y - size - 2);

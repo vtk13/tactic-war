@@ -10,8 +10,8 @@ define(['lib/events.js'], function(EventEmitter) {
                 x: unit.x,
                 y: unit.y,
                 direction: unit.direction,
-                lives: unit.lives,
-                maxLives: unit.maxLives()
+                health: unit.health,
+                maxHealth: unit.maxHealth()
             });
 
             unit._set = this.before(function(property, value) {
@@ -28,8 +28,8 @@ define(['lib/events.js'], function(EventEmitter) {
                 x: unit.x,
                 y: unit.y,
                 direction: unit.direction,
-                lives: unit.lives,
-                maxLives: unit.maxLives()
+                health: unit.health,
+                maxHealth: unit.maxHealth()
             });
 
             unit._set = this.before(function(property, value) {

@@ -16,9 +16,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.footmanAttackDistance();
     };
 
-    Footman.prototype.maxLives = function()
+    Footman.prototype.maxHealth = function()
     {
-        return this.rules.footmanLives();
+        return this.rules.footmanHealth();
     };
 
     Footman.prototype.attackPoints = function()

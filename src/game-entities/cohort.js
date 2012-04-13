@@ -20,7 +20,7 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
     {
         var res = [];
         for (var i in this.units) {
-            if (this.units[i].lives > 0) {
+            if (this.units[i].health > 0) {
                 res.push(this.units[i]);
             }
         }
