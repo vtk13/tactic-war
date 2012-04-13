@@ -24,11 +24,11 @@ html
         #menubar
             a(href='/')= __i('home-page')
             if user
-                |&nbsp;
+                &#32;
                 a(href='/mypage')= __i('my-page')
                 form
                     a(href='/mypage')= __i('hello-username', user.email)
-                    |&nbsp;
+                    &#32;
                     a(href='/logout')= __i('logout')
             else
                 form(method="post", action="/login")
@@ -40,7 +40,11 @@ html
                         label
                             span= __i('promt-password')
                             input(name="password", type="password")
-                    button(type="submit")= __i('button-login')
+                    button(type="submit", name="action", value="login")= __i('button-login')
+                    &#32;
+                    button(type="submit", name="action", value="login")= __i('button-register')
+            &#32;
+            a(href='/rating')= __i('user-rating')
             !{message}
         #content
             block content

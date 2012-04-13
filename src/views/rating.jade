@@ -1,0 +1,13 @@
+extends layout
+
+append scripts
+    script(src="/public/replay.js")
+
+block content
+    h1= __i('user-rating')
+    table.user-rating
+        each user, index in users
+            tr
+                td= index+1
+                td= user.rate
+                td= user.nick

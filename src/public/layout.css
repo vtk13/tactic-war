@@ -9,6 +9,12 @@ ul {
 ol {
     padding-left: 35px;
 }
+table {
+    border-collapse: collapse;
+}
+td {
+    padding: 1px 5px;
+}
 
 html, body {
     height: 100%;

@@ -47,3 +47,6 @@ canvas, .CodeMirror {
 .inactive .status.rejected {
     color: inherit;
 }
+.user-rating tr:nth-child(odd) {
+    background: #CBDACC;
+}

@@ -50,8 +50,19 @@ define(['restrict.js', 'db.js',
         });
     };
 
+    function rating(req, res)
+    {
+        db.query("SELECT SUBSTRING_INDEX(user_email, '@', 1) nick, user_rate rate " +
+                   "FROM tw_users LIMIT 200", function(err, result, fields) {
+            res.render('rating', {
+                users: result
+            });
+        });
+    };
+
     return function init(app) {
         app.get('/', index);
+        app.get('/rating', rating);
         app.get('/mypage', restrict('auth'), mypage);
     };
 });

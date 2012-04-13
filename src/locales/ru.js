@@ -21,9 +21,10 @@
 	"auth-caption": "Авторизация или регистрация:",
 	"promt-email": "Email:",
 	"promt-password": "Пароль:",
-	"button-login": "Регистрация / Вход",
+	"button-login": "Вход",
+	"button-register": "Регистрация",
 	"logout": "Выйти",
-	"wrong-password": "Неверный пароль!",
+	"login.wrong-password": "Неверный пароль!",
 	"registration-success": "Вы успешно зарегистрированны",
 	"login-to-view": "Авторизуйтесь для просмотра",
 	"rules-category1": "Категория 1",
@@ -60,5 +61,8 @@
 	"label.unit-tactic": "Тактика юнита: ",
 	"header.last-replays": "Повторы последних сражений",
 	"confirm.setout": "Ваш отряд попадет в общую очередь сражений только после того, как победит 5 беззащитных пехотинцев. Подолжить?",
-	"winner": "победитель"
+	"winner": "победитель",
+	"login.empty-request": "Введите email и пароль",
+	"login.no-such-user": "Нет такого пользователя",
+	"user-rating": "Рейтинг пользователей"
 }
