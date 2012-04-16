@@ -20,6 +20,7 @@ block content
             li move(distance) - двигаться вперед distance пикселей
             li attack(unit) - атаковать unit, если unit в зоне досягаемости
             li unit|null target() - результат этой функции может быть задан стратегической функцией. Смотрите описание setTarget(unit, target) ниже
+            li mixed command() - результат этой функции может быть задан стратегической функцией. Смотрите описание command(unit, command) ниже
             li log(mixed) - вывести переменную в консоль
             li store - переменная, в которой вы можете сохранить свои данные между запусками
         h2 Strategy API:
@@ -33,6 +34,7 @@ block content
             li array confederates() - массив своих живых юнитов
             li array enemies() - массив живых юнитов врага
             li setTarget(unit, target) - задать unit цель target, которую unit сможет получить функцией target()
+            li command(unit, command) - передать юниту комманду, которую unit сможет получить функцией command()
             li log(mixed) - вывести переменную в консоль
             li store - переменная, в которой вы можете сохранить свои данные между запусками
         h2 Свойства юнтов:

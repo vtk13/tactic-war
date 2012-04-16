@@ -20,6 +20,15 @@ define(function() {
             return res;
         };
 
+        this.command = function(unit, command)
+        {
+            for (var i in cohort.units) {
+                if (cohort.units[i].id == unit.id) {
+                    cohort.units[i].setCommand(command);
+                }
+            }
+        };
+
         this.setTarget = function(unit, target)
         {
             for (var i in cohort.units) {

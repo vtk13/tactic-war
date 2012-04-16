@@ -39,6 +39,13 @@ define(function() {
             };
         };
 
+        this.command = function()
+        {
+            var res = unit.command;
+            delete unit.command;
+            return res;
+        }
+
         this.nearest = function()
         {
             var res = unit.map.nearest(unit, function(_unit) {

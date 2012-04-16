@@ -80,16 +80,16 @@ define([], function() {
 
             // live bar
             ctx.beginPath();
-            ctx.moveTo(unit.x - size, unit.y - size - 2);
-            ctx.lineTo(unit.x + size, unit.y - size - 2);
-            ctx.strokeStyle = '#FFF0A5';
+            ctx.moveTo(Math.round(unit.x - size), Math.round(unit.y - size - 2));
+            ctx.lineTo(Math.round(unit.x + size), Math.round(unit.y - size - 2));
+            ctx.strokeStyle = '#666';
             ctx.stroke();
 
             var livePercent = unit.health / unit.maxHealth;
 
             ctx.beginPath();
-            ctx.moveTo(unit.x - size, unit.y - size - 2);
-            ctx.lineTo(unit.x - size + livePercent * size * 2, unit.y - size - 2);
+            ctx.moveTo(Math.round(unit.x - size), Math.round(unit.y - size - 2));
+            ctx.lineTo(Math.round(unit.x - size + livePercent * size * 2), Math.round(unit.y - size - 2));
             ctx.strokeStyle = '#8E2800';
             ctx.stroke();
         } else {

@@ -39,6 +39,11 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this.target = unit;
     };
 
+    Unit.prototype.setCommand = function(command)
+    {
+        this.command = command;
+    };
+
     Unit.prototype.step = function()
     {
         this.actionPoints = 1;

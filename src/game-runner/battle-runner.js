@@ -104,7 +104,7 @@ define(['db.js', 'game-runner/battle.js', 'child_process',
                     }
                 );
             }
-        }, 10000);
+        }, 30000);
         n.on('message', function(result) {
             clearTimeout(killTimeout);
             console.log(result.winner.id == p1 ? 'Approved' : 'Rejected');
