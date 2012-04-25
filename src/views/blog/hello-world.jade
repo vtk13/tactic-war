@@ -42,8 +42,7 @@ block content
             | if (canAttack(_target)) {
             |     attack(_target);
             | } else {
-            |     turn(direction(_target));
-            |     move(distance(_target));
+            |     move(path(_target));
             | }
         p
             | Сохраните программу. На игровом поле справа выберите любого юнита

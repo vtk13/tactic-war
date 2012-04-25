@@ -116,7 +116,9 @@ define(['game-entities/helpers/unit-factory.js',
         this.reloadTactics();
 
         $('#field').click(function(e) {
-            var unit = self.game.map.findByXY(e.offsetX, e.offsetY);
+            var unit = self.game.map.findByXY(
+                    e.offsetX / Player.gridSize,
+                    e.offsetY / Player.gridSize);
             self.selectUnit(unit);
             logger.emitChanges();
         });

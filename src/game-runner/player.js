@@ -2,9 +2,12 @@ define([], function() {
     function Player(logger, canvas)
     {
         this.units = [];
+        this.gridSize = Player.gridSize;
         this.c2d = canvas.getContext('2d');
         this.setSource(logger);
     };
+
+    Player.gridSize = 20;
 
     Player.prototype.setSource = function(logger)
     {
@@ -18,6 +21,12 @@ define([], function() {
                         self.units[unit.id] = {};
                     }
                     for (var j in unit) {
+                        if (j == 'x' || j == 'y') {
+                            unit[j] = unit[j] * self.gridSize + self.gridSize / 2;
+                        }
+                        if (j == 'direction') {
+                            unit[j] = unit[j] * Math.PI / 4;
+                        }
                         self.units[unit.id][j] = unit[j];
                     }
                 }
@@ -32,6 +41,21 @@ define([], function() {
         var ctx = this.c2d;
         ctx.fillStyle = '#DCEBDD';
         ctx.fillRect(0, 0, 600, 300);
+
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = 1;
+        for (var x = this.gridSize ; x < 600 ; x += this.gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(x + 0.5, 0);
+            ctx.lineTo(x + 0.5, 300);
+            ctx.stroke();
+        }
+        for (var y = this.gridSize ; y < 300 ; y += this.gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y + 0.5);
+            ctx.lineTo(600, y + 0.5);
+            ctx.stroke();
+        }
 
         var units = [];
 

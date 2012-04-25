@@ -27,11 +27,14 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
     Unit.prototype.maxHealth        = function() { throw new Error('Subclass responsibility'); };
     Unit.prototype.attackPoints     = function() { throw new Error('Subclass responsibility'); };
     Unit.prototype.armorPoints      = function() { throw new Error('Subclass responsibility'); };
-    Unit.prototype.speedPoints      = function() { throw new Error('Subclass responsibility'); };
+    Unit.prototype.movePoints       = function() { throw new Error('Subclass responsibility'); };
 
     Unit.prototype.hit = function(attack)
     {
         this._set('health', this.health - attack - this.armorPoints());
+        if (this.health <= 0) {
+            this.map.hide(this);
+        }
     };
 
     Unit.prototype.setTarget = function(unit)
@@ -46,8 +49,8 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
 
     Unit.prototype.step = function()
     {
-        this.actionPoints = 1;
-        if (this.tactic) {
+        this.actionPoints = this.movePoints();
+        if (this.health > 0 && this.tactic) {
             this.tactic.execute(this.sandbox);
         }
     };
@@ -57,12 +60,26 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         return this.map.distance(this, target) < this.attackDistance();
     };
 
-    Unit.prototype.move = function(distance)
+    Unit.prototype.move = function(path)
     {
-        if (this.actionPoints && distance > 0) {
-            distance = Math.min(distance, this.speedPoints());
-            this.map.move(this, distance);
-            this.actionPoints--;
+        var direction;
+        if (Array.isArray(path)) {
+            while ((direction = path.shift()) !== undefined) {
+                if (!this.move(direction)) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            direction = path;
+            if (this.actionPoints) {
+                this.map.step(this, direction);
+                this.turn(direction);
+                this.actionPoints--;
+                return true;
+            } else {
+                return false;
+            }
         }
     };
 
@@ -72,7 +89,7 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         if (this.actionPoints && this.canAttack(target)) {
             this.turn(this.map.direction(this, target));
             target.hit(this.attackPoints());
-            this.actionPoints--;
+            this.actionPoints = 0;
         }
     };
 

@@ -31,9 +31,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.archerArmor();
     };
 
-    Archer.prototype.speedPoints = function()
+    Archer.prototype.movePoints = function()
     {
-        return this.rules.archerSpeed();
+        return this.rules.archerMovePoints();
     };
 
     return Archer;

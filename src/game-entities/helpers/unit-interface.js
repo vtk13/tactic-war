@@ -3,10 +3,17 @@ define(function() {
     {
         this.store = {};
 
-        this.move = function(distance)
+        this.move = function(path)
         {
-            if (distance > 0) {
-                unit.move(distance);
+            unit.move(path);
+        };
+
+        this.path = function(to)
+        {
+            if (to) {
+                return unit.map.path(unit, to);
+            } else {
+                return null;
             }
         };
 
@@ -74,11 +81,6 @@ define(function() {
             if (toUnit) {
                 return unit.map.direction(unit, toUnit);
             }
-        };
-
-        this.turn = function(direction)
-        {
-            unit.turn(direction);
         };
 
         if (typeof window == 'undefined') {

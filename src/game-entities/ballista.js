@@ -48,9 +48,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.ballistaArmor();
     };
 
-    Ballista.prototype.speedPoints = function()
+    Ballista.prototype.movePoints = function()
     {
-        return this.rules.ballistaSpeed();
+        return this.rules.ballistaMovePoints();
     };
 
     return Ballista;

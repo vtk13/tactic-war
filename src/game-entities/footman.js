@@ -31,9 +31,9 @@ define(['game-entities/unit.js'], function(Unit) {
         return this.rules.footmanArmor();
     };
 
-    Footman.prototype.speedPoints = function()
+    Footman.prototype.movePoints = function()
     {
-        return this.rules.footmanSpeed();
+        return this.rules.footmanMovePoints();
     };
 
     return Footman;
