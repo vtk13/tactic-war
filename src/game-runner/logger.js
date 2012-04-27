@@ -6,6 +6,7 @@ define(['lib/events.js'], function(EventEmitter) {
             var unit = game.cohort1.units[i];
             units.push({
                 id: unit.id,
+                party: 1,
                 type: unit.constructor.name,
                 x: unit.x,
                 y: unit.y,
@@ -24,6 +25,7 @@ define(['lib/events.js'], function(EventEmitter) {
             var unit = game.cohort2.units[i];
             units.push({
                 id: unit.id,
+                party: 2,
                 type: unit.constructor.name,
                 x: unit.x,
                 y: unit.y,

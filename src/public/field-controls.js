@@ -103,7 +103,7 @@ define(['game-entities/helpers/unit-factory.js',
                     interval = null;
                     steps = 100;
                 }
-            }, 200);
+            }, 100);
         });
 
         buttonPause.click(function() {

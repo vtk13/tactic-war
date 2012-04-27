@@ -10,7 +10,7 @@
 	"cohort-edit": "Program cohort",
 	"code-editor": "Code editor",
 	"play-step": "Play step",
-	"play-all": "Play all",
+	"play-all": "Play 100 steps",
 	"replay-view": "Replay",
 	"set-out": "Set out",
 	"cohort-replays": "Cohort replays",

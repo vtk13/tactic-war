@@ -18,7 +18,6 @@ block content
                 | int direction(unit) - угол на который нужно повернуться, чтобы смотреть на unit
                 ul
                     li 0 - вправо, 1 - вправо-вниз, 2 - вниз, 3 - влево-вниз, 4 - влево, 5 - влево-вверх, 6 - вверх, 7 - вправо-вверх
-            li turn(int) - повернуться на заданный угол
             li float distance(unit) - растояние до unit
             li direction[] path(toUnit) - возвращает список шагов, необходимых для движения к цели, результат этой функции может быть передан функции move()
             li move(direction) - сделать шаг в заданном направлении
@@ -47,5 +46,5 @@ block content
             li int id
             li int health
             li string type - "Footman", "Archer", "Ballista"
-            li float x
-            li float y
+            li int x
+            li int y

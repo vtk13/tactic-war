@@ -63,6 +63,8 @@ define([], function() {
             units.push(this.units[i]);
         }
         units.sort(function(a, b) {
+            if (a.health == 0 && b.health > 0) return -1;
+            if (b.health == 0 && a.health > 0) return 1;
             if (a.y < b.y) return -1;
             if (a.y > b.y) return 1;
             return 0;
@@ -87,10 +89,21 @@ define([], function() {
         var size = 7;
         if (unit.health > 0) {
             ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
-            ctx.closePath();
-            ctx.fill();
+            if (unit.party == 1) {
+                ctx.beginPath();
+                ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
+                ctx.closePath();
+                ctx.fill();
+            } else {
+                ctx.beginPath();
+                ctx.moveTo(unit.x - size + 0.5, unit.y - size + 0.5);
+                ctx.lineTo(unit.x + size - 0.5, unit.y - size + 0.5);
+                ctx.lineTo(unit.x + size - 0.5, unit.y + size - 0.5);
+                ctx.lineTo(unit.x - size + 0.5, unit.y + size - 0.5);
+                ctx.lineTo(unit.x - size + 0.5, unit.y - size + 0.5);
+                ctx.closePath();
+                ctx.fill();
+            }
             if (unit.selected) {
                 ctx.strokeStyle = '#000';
                 ctx.stroke();
@@ -118,10 +131,15 @@ define([], function() {
             ctx.stroke();
         } else {
             ctx.fillStyle = '#000';
-            ctx.beginPath();
-            ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
-            ctx.closePath();
-            ctx.fill();
+            if (unit.party == 1) {
+                ctx.beginPath();
+                ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
+                ctx.closePath();
+                ctx.fill();
+            } else {
+                ctx.fillRect(unit.x - size, unit.y - size,
+                        2 * size, 2 * size);
+            }
         }
     };
 

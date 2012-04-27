@@ -15,6 +15,8 @@ define(['game-entities/map.js'], function(Map) {
 
         cohort1.enemies = cohort2;
         cohort2.enemies = cohort1;
+
+        this.stepQueue = [];
     };
 
     /**
@@ -22,29 +24,30 @@ define(['game-entities/map.js'], function(Map) {
      */
     Game.prototype.step = function()
     {
-        var units1 = this.cohort1.alives();
-        if (units1.length > 0) {
-            this.cohort1.step();
-        } else {
-            return {winner: this.cohort2};
-        }
-        var units2 = this.cohort2.alives();
-        if (units2.length > 0) {
-            this.cohort2.step();
-        } else {
-            return {winner: this.cohort1};
+        if (this.stepQueue.length == 0) {
+            var units1 = this.cohort1.alives();
+            if (units1.length > 0) {
+                this.cohort1.step();
+            } else {
+                return {winner: this.cohort2};
+            }
+            var units2 = this.cohort2.alives();
+            if (units2.length > 0) {
+                this.cohort2.step();
+            } else {
+                return {winner: this.cohort1};
+            }
+
+            this.stepQueue = units1.concat(units2);
+            for (var i in this.stepQueue) {
+                this.stepQueue[i].random = Math.random();
+            }
+            this.stepQueue.sort(function(u1, u2) {
+                return u1.random - u2.random;
+            });
         }
 
-        var units = units1.concat(units2);
-        for (var i in units) {
-            units[i].random = Math.random();
-        }
-        units.sort(function(u1, u2) {
-            return u1.random - u2.random;
-        });
-        for (var i in units) {
-            units[i].step();
-        }
+        this.stepQueue.pop().step();
 
         return false; // game over? no! -> false
     };

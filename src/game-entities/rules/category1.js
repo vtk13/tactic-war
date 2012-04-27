@@ -16,7 +16,7 @@ define(function() {
 
     Category1.prototype.maxSteps = function()
     {
-        return 400;
+        return 4000;
     };
 
     Category1.prototype.availableUnits = function()
