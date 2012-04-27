@@ -63,8 +63,8 @@ define([], function() {
             units.push(this.units[i]);
         }
         units.sort(function(a, b) {
-            if (a.health == 0 && b.health > 0) return -1;
-            if (b.health == 0 && a.health > 0) return 1;
+            if (a.health <= 0 && b.health > 0) return -1;
+            if (b.health <= 0 && a.health > 0) return 1;
             if (a.y < b.y) return -1;
             if (a.y > b.y) return 1;
             return 0;
