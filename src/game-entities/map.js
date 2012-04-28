@@ -50,8 +50,7 @@ define(function() {
             } else {
                 this.mapData[unit.x][unit.y] = null;
                 this.mapData[nx][ny] = unit;
-                unit._set('x', nx);
-                unit._set('y', ny);
+                unit.setPosition(nx, ny);
                 return true;
             }
         } catch (ex) {

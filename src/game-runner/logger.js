@@ -1,7 +1,32 @@
 define(['lib/events.js'], function(EventEmitter) {
     function Logger(game)
     {
+        var self = this;
         var units = [];
+
+        function unitChange(event)
+        {
+            if (units[this.id] == undefined) {
+                units[this.id] = {id: this.id, path: []};
+            }
+            var path = {};
+            for (var i in event) {
+                if (event.hasOwnProperty(i)) {
+                    if (i == 'x') {
+                        path.x = units[this.id].x;
+                    }
+                    if (i == 'y') {
+                        path.y = units[this.id].y;
+                    }
+                    units[this.id][i] = event[i];
+                }
+            }
+
+            if (path.x || path.y) {
+                units[this.id].path.push(path);
+            }
+        };
+
         for (var i in game.cohort1.units) {
             var unit = game.cohort1.units[i];
             units.push({
@@ -12,13 +37,10 @@ define(['lib/events.js'], function(EventEmitter) {
                 y: unit.y,
                 direction: unit.direction,
                 health: unit.health,
-                maxHealth: unit.maxHealth()
+                maxHealth: unit.maxHealth(),
+                path: [] // to track path through step
             });
-
-            unit._set = this.before(function(property, value) {
-                if (units[this.id] == undefined) units[this.id] = {id: this.id};
-                units[this.id][property] = value;
-            }, unit._set);
+            unit.on('change', unitChange);
         }
 
         for (var i in game.cohort2.units) {
@@ -33,11 +55,7 @@ define(['lib/events.js'], function(EventEmitter) {
                 health: unit.health,
                 maxHealth: unit.maxHealth()
             });
-
-            unit._set = this.before(function(property, value) {
-                if (units[this.id] == undefined) units[this.id] = {id: this.id};
-                units[this.id][property] = value;
-            }, unit._set);
+            unit.on('change', unitChange);
         }
 
         this.init = function()
@@ -47,8 +65,6 @@ define(['lib/events.js'], function(EventEmitter) {
                 units = [];
             }
         };
-
-        var self = this;
 
         this.emitChanges = function()
         {

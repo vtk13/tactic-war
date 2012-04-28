@@ -27,6 +27,19 @@ define([], function() {
                         if (j == 'direction') {
                             unit[j] = unit[j] * Math.PI / 4;
                         }
+                        if (j == 'path') {
+                            for (var i in unit.path) {
+                                unit.path[i].x = unit.path[i].x * self.gridSize + self.gridSize / 2;
+                                unit.path[i].y = unit.path[i].y * self.gridSize + self.gridSize / 2;
+                            }
+
+                            if (self.units[unit.id]) {
+                                unit.path.unshift({
+                                    x: self.units[unit.id].x,
+                                    y: self.units[unit.id].y
+                                });
+                            }
+                        }
                         self.units[unit.id][j] = unit[j];
                     }
                 }
@@ -139,6 +152,15 @@ define([], function() {
             } else {
                 ctx.fillRect(unit.x - size, unit.y - size,
                         2 * size, 2 * size);
+            }
+        }
+
+        if (unit.path) {
+            for (var i in unit.path) {
+                ctx.beginPath();
+                ctx.arc(unit.path[i].x, unit.path[i].y, 1, 0, Math.PI*2, true);
+                ctx.closePath();
+                ctx.fill();
             }
         }
     };

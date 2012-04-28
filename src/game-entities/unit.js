@@ -1,4 +1,5 @@
-define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
+define(['game-entities/helpers/unit-interface.js',
+        'lib/events.js'], function(UnitInterface, EventEmitter) {
     /**
      *
      * @param tactic Code
@@ -18,9 +19,27 @@ define(['game-entities/helpers/unit-interface.js'], function(UnitInterface) {
         this.sandbox = new UnitInterface(this);
     };
 
+    for (var i in EventEmitter.prototype) {
+        if (EventEmitter.prototype.hasOwnProperty(i)) {
+            Unit.prototype[i] = EventEmitter.prototype[i];
+        }
+    }
+
     Unit.prototype._set = function(property, value)
     {
-        this[property] = value;
+        var event = {};
+        event[property] = this[property] = value;
+        this.emit('change', event);
+    };
+
+    Unit.prototype.setPosition = function(x, y)
+    {
+        this.x = x;
+        this.y = y;
+        this.emit('change', {
+            x: x,
+            y: y
+        });
     };
 
     Unit.prototype.attackDistance   = function() { throw new Error('Subclass responsibility'); };
