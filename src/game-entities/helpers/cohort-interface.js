@@ -3,56 +3,28 @@ define(function() {
     {
         this.store = {};
 
+        this.enemies = function() {
+            return cohort.enemies.alives(true);
+        };
+
         this.confederates = function() {
-            var res = [];
-            for (var i in cohort.units) {
-                var unit = cohort.units[i];
-                if (unit.health > 0) {
-                    res.push({
-                        id: unit.id,
-                        type: unit.constructor.name,
-                        health: unit.health,
-                        x: unit.x,
-                        y: unit.y
-                    });
-                }
-            }
-            return res;
+            return cohort.alives(true);
         };
 
         this.command = function(unit, command)
         {
-            for (var i in cohort.units) {
-                if (cohort.units[i].id == unit.id) {
-                    cohort.units[i].setCommand(command);
-                }
+            unit = cohort.fetch(unit);
+            if (unit) {
+                unit.setCommand(command);
             }
         };
 
         this.setTarget = function(unit, target)
         {
-            for (var i in cohort.units) {
-                if (cohort.units[i].id == unit.id) {
-                    cohort.units[i].setTarget(target);
-                }
+            unit = cohort.fetch(unit);
+            if (unit) {
+                unit.setTarget(target);
             }
-        };
-
-        this.enemies = function() {
-            var res = [];
-            for (var i in cohort.enemies.units) {
-                var unit = cohort.enemies.units[i];
-                if (unit.health > 0) {
-                    res.push({
-                        id: unit.id,
-                        type: unit.constructor.name,
-                        health: unit.health,
-                        x: unit.x,
-                        y: unit.y
-                    });
-                }
-            }
-            return res;
         };
 
         if (typeof window == 'undefined') {

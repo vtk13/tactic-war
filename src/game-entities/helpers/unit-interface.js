@@ -19,31 +19,35 @@ define(function() {
 
         this.attack = function(target)
         {
-            unit.attack(target);
+            if (target) {
+                unit.attack(target);
+            }
         };
 
         this.canAttack = function(target)
         {
-            return unit.canAttack(target);
+            if (target) {
+                return unit.canAttack(target);
+            }
+            return false;
         };
 
         this.target = function()
         {
-            if (unit.target && unit.target.health <= 0) {
-                unit.target = null;
+            if (unit.target) {
+                var target = unit.map.fetch(unit.target);
+                if (target.health <= 0) {
+                    unit.target = null;
+                    return null;
+                } else {
+                    return target.proxy;
+                }
             }
-            return unit.target;
         };
 
         this.self = function()
         {
-            return {
-                id: unit.id,
-                type: unit.constructor.name,
-                health: unit.health,
-                x: unit.x,
-                y: unit.y
-            };
+            return unit.proxy;
         };
 
         this.command = function()
@@ -59,13 +63,7 @@ define(function() {
                 return _unit.health > 0 && _unit.cohortId != unit.cohortId;
             });
             if (res) {
-                return {
-                    id: res.id,
-                    type: res.constructor.name,
-                    health: res.health,
-                    x: res.x,
-                    y: res.y
-                };
+                return res.proxy;
             } else {
                 null;
             }

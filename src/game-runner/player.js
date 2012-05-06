@@ -146,12 +146,12 @@ define([], function() {
             ctx.fillStyle = '#000';
             if (unit.party == 1) {
                 ctx.beginPath();
-                ctx.arc(unit.x, unit.y, size, 0, Math.PI*2, true);
+                ctx.arc(unit.x, unit.y, size / 2, 0, Math.PI*2, true);
                 ctx.closePath();
                 ctx.fill();
             } else {
-                ctx.fillRect(unit.x - size, unit.y - size,
-                        2 * size, 2 * size);
+                ctx.fillRect(unit.x - size / 2, unit.y - size / 2,
+                        2 * size / 2, 2 * size / 2);
             }
         }
 

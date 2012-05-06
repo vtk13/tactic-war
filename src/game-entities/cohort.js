@@ -16,12 +16,21 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
         this.sandbox = new CohortInterface(this);
     }
 
-    Cohort.prototype.alives = function()
+    /**
+     *
+     * @param bool proxy
+     * @return
+     */
+    Cohort.prototype.alives = function(proxy)
     {
         var res = [];
         for (var i in this.units) {
             if (this.units[i].health > 0) {
-                res.push(this.units[i]);
+                if (proxy) {
+                    res.push(this.units[i].proxy);
+                } else {
+                    res.push(this.units[i]);
+                }
             }
         }
         return res;
@@ -34,14 +43,29 @@ define(['game-entities/helpers/cohort-interface.js'], function(CohortInterface) 
         }
     };
 
+    /**
+     * @deprecated
+     * @param unit Unit|SafeProxy
+     * @return
+     */
     Cohort.prototype.contain = function(unit)
     {
+        return this.fetch(unit);
+    };
+
+    /**
+     *
+     * @param unit Unit|SafeProxy
+     * @return
+     */
+    Cohort.prototype.fetch = function(unit)
+    {
         for (var i in this.units) {
-            if (this.units[i] == unit) {
-                return true;
+            if (this.units[i].id == unit.id) {
+                return this.units[i];
             }
         }
-        return false;
+        return null;
     };
 
     return Cohort;

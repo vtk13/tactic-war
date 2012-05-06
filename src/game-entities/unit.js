@@ -17,6 +17,7 @@ define(['game-entities/helpers/unit-interface.js',
 
         this.actionPoints = 1;
         this.sandbox = new UnitInterface(this);
+        this.proxy = new SafeProxy(this);
     };
 
     for (var i in EventEmitter.prototype) {
@@ -116,6 +117,31 @@ define(['game-entities/helpers/unit-interface.js',
     {
         this._set('direction', direction);
     };
+
+    function SafeProxy(unit)
+    {
+        this.id = unit.id;
+
+        this.health = function()
+        {
+            return unit.health;
+        };
+
+        this.type = function()
+        {
+            return unit.contructor.name;
+        };
+
+        this.x = function()
+        {
+            return unit.x;
+        };
+
+        this.y = function()
+        {
+            return unit.y;
+        };
+    }
 
     return Unit;
 });
