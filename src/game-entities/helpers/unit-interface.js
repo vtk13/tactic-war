@@ -72,7 +72,13 @@ define(function() {
 
         this.distance = function(to)
         {
-            return unit.map.distance(unit, to);
+            if (typeof to != 'object') {
+                throw new Error('Method distance() accepts object, ' + (typeof to) + ' given.');
+            } else if (to === null) {
+                throw new Error('Method distance() accepts object, null given.');
+            } else {
+                return unit.map.distance(unit, to);
+            }
         };
 
         this.direction = function(toUnit)
