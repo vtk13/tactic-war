@@ -60,7 +60,7 @@ define(function() {
                 return true;
             }
         } catch (ex) {
-            console.log(unit, direction);
+            console.log(ex.message, unit, direction);
         }
     };
 
@@ -234,6 +234,8 @@ define(function() {
                 p = p.parent;
             }
             return res;
+        } else {
+            return false;
         }
     };
 

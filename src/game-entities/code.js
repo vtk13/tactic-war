@@ -7,12 +7,18 @@ define([], function() {
         {
             this.id = id;
             this.name = name;
+            this.src = src;
             this.script = vm.createScript(src);
         }
 
         Code.prototype.execute = function(sandbox)
         {
-            this.script.runInNewContext(sandbox);
+            try {
+                this.script.runInNewContext(sandbox);
+            } catch (err) {
+                console.log(this.src);
+                throw err;
+            }
         }
     } else {
         var Code = function Code(id, name, src)
