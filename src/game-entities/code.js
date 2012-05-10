@@ -31,12 +31,7 @@ define([], function() {
         Code.prototype.execute = function(sandbox)
         {
             with (sandbox) {
-                try {
-                    eval(this.src);
-                } catch (err) {
-                    console.log(this.src);
-                    throw err;
-                }
+                eval(this.src);
             }
         }
     }
