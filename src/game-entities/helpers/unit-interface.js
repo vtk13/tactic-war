@@ -20,8 +20,9 @@ define(function() {
         this.attack = function(target)
         {
             if (target) {
-                unit.attack(target);
+                return unit.attack(target);
             }
+            return false;
         };
 
         this.canAttack = function(target)
@@ -69,9 +70,9 @@ define(function() {
             }
         };
 
-        this.distance = function(toUnit)
+        this.distance = function(to)
         {
-            return unit.map.distance(unit, toUnit);
+            return unit.map.distance(unit, to);
         };
 
         this.direction = function(toUnit)

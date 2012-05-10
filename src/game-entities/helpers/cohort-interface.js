@@ -11,6 +11,34 @@ define(function() {
             return cohort.alives(true);
         };
 
+        this.middle = function(units)
+        {
+            var x = 0, y = 0;
+            for (var i in units) {
+                x += units[i].x();
+                y += units[i].y();
+            }
+            return {
+                x: x / units.length,
+                y: y / units.length
+            };
+        };
+
+        this.nearest = function(from)
+        {
+            var res = [];
+            var nearests = cohort.map.nearests(from, function(_unit) {
+                return _unit.health > 0 && _unit.cohortId != cohort.id;
+            });
+            for (var i in nearests) {
+                res.push({
+                    unit: nearests[i].unit.proxy,
+                    distance: nearests[i].distance
+                });
+            }
+            return res;
+        };
+
         this.command = function(unit, command)
         {
             unit = cohort.fetch(unit);

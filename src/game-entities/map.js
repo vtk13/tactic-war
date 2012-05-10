@@ -107,34 +107,59 @@ define(function() {
 
     /**
      *
-     * @param Unit unit
+     * @param Unit from
      * @param function filter
      * @return
      */
-    Map.prototype.nearest = function(unit, filter)
+    Map.prototype.nearest = function(from, filter)
     {
         var nearest = null;
-        if ((unit = this.fetch(unit))) {
-            var distance, minDistance = Math.max(this.width, this.height) * 2;
-            for (var i in this.items) {
-                if (this.items[i].id == unit.id) continue;
-                if (filter && !filter(this.items[i])) {
-                    continue;
-                }
-                distance = this.distance(unit, this.items[i]);
-                if (distance < minDistance) {
-                    nearest = this.items[i];
-                    minDistance = distance;
-                }
+        var distance, minDistance = Math.max(this.width, this.height) * 2;
+        for (var i in this.items) {
+            if (from.id && (this.items[i].id == from.id)) {
+                continue;
+            }
+            if (filter && !filter(this.items[i])) {
+                continue;
+            }
+            distance = this.distance(from, this.items[i]);
+            if (distance < minDistance) {
+                nearest = this.items[i];
+                minDistance = distance;
             }
         }
         return nearest;
     };
 
+    Map.prototype.nearests = function(from, filter)
+    {
+        var nearests = [];
+        for (var i in this.items) {
+            if (from.id && (this.items[i].id == from.id)) {
+                continue;
+            }
+            if (filter && !filter(this.items[i])) {
+                continue;
+            }
+            nearests.push({
+                unit: this.items[i],
+                distance: this.distance(from, this.items[i])
+            });
+        }
+        nearests.sort(function(a, b) {
+            return a.distance - b.distance;
+        });
+        return nearests;
+    };
+
     Map.prototype.distance = function(from, to)
     {
-        from = this.fetch(from);
-        to = this.fetch(to);
+        if (from.id) {
+            from = this.fetch(from);
+        }
+        if (to.id) {
+            to = this.fetch(to);
+        }
         if (from && to) {
             var x = to.x - from.x;
             var y = to.y - from.y;

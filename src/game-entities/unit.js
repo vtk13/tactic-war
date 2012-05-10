@@ -110,6 +110,9 @@ define(['game-entities/helpers/unit-interface.js',
             this.turn(this.map.direction(this, target));
             target.hit(this.attackPoints());
             this.actionPoints = 0;
+            return true;
+        } else {
+            return false;
         }
     };
 

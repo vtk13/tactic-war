@@ -15,6 +15,7 @@ define(['game-entities/map.js'], function(Map) {
 
         cohort1.enemies = cohort2;
         cohort2.enemies = cohort1;
+        cohort1.map = cohort2.map = this.map;
 
         this.stepQueue = [];
     };
